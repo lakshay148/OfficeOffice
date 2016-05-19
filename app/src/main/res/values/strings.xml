@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">OfficeOffice</string>
+    <string name="emp_id">Employee Id</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="all_projects">All Projects</string>
+    <string name="save_data">Save</string>
 </resources>
