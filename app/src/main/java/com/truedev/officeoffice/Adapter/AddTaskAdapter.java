@@ -17,11 +17,11 @@ import java.util.ArrayList;
 /**
  * Created by dipanshugarg on 17/5/16.
  */
-public class DynamicAdapter extends BaseAdapter {
+public class AddTaskAdapter extends BaseAdapter {
 
     Context context;
     ArrayList<RowData> rowDatas;
-    public DynamicAdapter(Context context , ArrayList<RowData> list) {
+    public AddTaskAdapter(Context context , ArrayList<RowData> list) {
         this.context = context;
         this.rowDatas = list;
     }

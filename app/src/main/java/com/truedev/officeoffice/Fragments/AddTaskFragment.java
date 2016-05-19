@@ -15,7 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-import com.truedev.officeoffice.Adapter.DynamicAdapter;
+import com.truedev.officeoffice.Adapter.AddTaskAdapter;
 import com.truedev.officeoffice.Database.DailyTaskDB;
 import com.truedev.officeoffice.Model.RowData;
 import com.truedev.officeoffice.R;
@@ -23,7 +23,7 @@ import com.truedev.officeoffice.R;
 import java.util.ArrayList;
 
 
-public class DynamicAddFragment extends Fragment {
+public class AddTaskFragment extends Fragment {
 
     Context context;
     EditText editText;
@@ -32,8 +32,8 @@ public class DynamicAddFragment extends Fragment {
     Button save;
     private ArrayList<RowData> items = new ArrayList<RowData>();
     private ArrayList<String> task = new ArrayList<String>();
-    DynamicAdapter dynamicAdapter;
-    public DynamicAddFragment(Context context) {
+    AddTaskAdapter dynamicAdapter;
+    public AddTaskFragment(Context context) {
         this.context  = context;
     }
 
@@ -56,7 +56,7 @@ public class DynamicAddFragment extends Fragment {
                 else {
                     String task = editText.getText().toString();
                     items.add(new RowData(task));
-                    dynamicAdapter = new DynamicAdapter(context, items);
+                    dynamicAdapter = new AddTaskAdapter(context, items);
                     listView.setAdapter(dynamicAdapter);
                     editText.setText("");
                 }

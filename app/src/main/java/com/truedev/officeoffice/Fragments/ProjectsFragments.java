@@ -59,7 +59,7 @@ public class ProjectsFragments extends Fragment {
                 String  itemValue = (String) listView.getItemAtPosition(position);
                 if(itemPosition <= project.size()) {
 
-                    Fragment fragment = new DynamicAddFragment(context);
+                    Fragment fragment = new AddTaskFragment(context);
                     FragmentManager fragmentManager = getFragmentManager();
                     fragmentManager.beginTransaction().replace(R.id.content_frame,fragment).addToBackStack(null).commit();
                 }
