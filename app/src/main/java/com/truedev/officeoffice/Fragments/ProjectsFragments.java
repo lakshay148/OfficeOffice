@@ -26,10 +26,11 @@ public class ProjectsFragments extends Fragment {
 
     Context context;
     ListView listView;
-    ArrayList<String> project= new ArrayList<>();
+    ArrayList<String> project;
+
 
     public ProjectsFragments(Context applicationContext) {
-    this.context= applicationContext;
+        this.context= applicationContext;
     }
 
     @Nullable
@@ -37,8 +38,8 @@ public class ProjectsFragments extends Fragment {
     public View onCreateView(LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.activity_main,container,false);
-
-       listView = (ListView)view.findViewById(R.id.listview);
+        listView = (ListView)view.findViewById(R.id.listview);
+        project = new ArrayList<>();
 
         project.add("SFA");
         project.add("Auction");
@@ -60,8 +61,7 @@ public class ProjectsFragments extends Fragment {
 
                     Fragment fragment = new DynamicAddFragment(context);
                     FragmentManager fragmentManager = getFragmentManager();
-                    fragmentManager.beginTransaction().replace(R.id.content_frame,fragment).commit();
-
+                    fragmentManager.beginTransaction().replace(R.id.content_frame,fragment).addToBackStack(null).commit();
                 }
                 Toast.makeText(context, itemValue , Toast.LENGTH_LONG).show();
             }

@@ -12,6 +12,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -139,5 +140,19 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("Projects");
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.content_frame,fragment).commit();
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (drawerLayout.isDrawerOpen(Gravity.LEFT)) {
+            drawerLayout.closeDrawers();
+        } else {
+            if (getSupportFragmentManager().getBackStackEntryCount()> 0) {
+                getSupportFragmentManager().popBackStack();
+
+            } else {
+                super.onBackPressed();
+            }
+        }
     }
 }
