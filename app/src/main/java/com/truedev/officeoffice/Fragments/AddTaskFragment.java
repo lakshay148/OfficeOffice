@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,17 +17,21 @@ import android.widget.Toast;
 
 
 import com.truedev.officeoffice.Adapter.AddTaskAdapter;
+import com.truedev.officeoffice.CommonUtils;
+import com.truedev.officeoffice.DBFunctions;
 import com.truedev.officeoffice.Database.DailyTaskDB;
 import com.truedev.officeoffice.Model.RowData;
 import com.truedev.officeoffice.R;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 
 public class AddTaskFragment extends Fragment {
 
     Context context;
-    EditText editText;
+    EditText editText,date;
     ImageView addTask;
     ListView listView;
     Button save;
@@ -42,10 +47,13 @@ public class AddTaskFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.add_layout,container,false);
+
         editText = (EditText)view.findViewById(R.id.get_task);
         addTask = (ImageView)view.findViewById(R.id.add_task);
         listView = (ListView)view.findViewById(R.id.add_layout);
+        date = (EditText) view.findViewById(R.id.date);
         save = (Button) view.findViewById(R.id.save);
+        date.setText(CommonUtils.getCurrentDate());
 
         addTask.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,8 +81,8 @@ public class AddTaskFragment extends Fragment {
                     TextView textView = (TextView) view.findViewById(R.id.data);
                     task.add(textView.getText()+"");
                 }
-                DailyTaskDB dailyTaskDB = new DailyTaskDB(context);
-                long getSuccess= dailyTaskDB.insertTask(task);
+                DBFunctions dailyTaskDB = new DBFunctions();
+                long getSuccess= dailyTaskDB.insertTask(task,CommonUtils.getCurrentDate());
                 if(getSuccess>=1) {
                     Toast.makeText(getActivity(),"Data Added Successfully",Toast.LENGTH_LONG).show();
                 }

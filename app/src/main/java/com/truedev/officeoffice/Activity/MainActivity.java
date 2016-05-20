@@ -22,6 +22,7 @@ import android.widget.ListView;
 
 import com.truedev.officeoffice.Constants;
 import com.truedev.officeoffice.Fragments.ProjectsFragments;
+import com.truedev.officeoffice.Fragments.ShowAllTask;
 import com.truedev.officeoffice.R;
 
 public class MainActivity extends AppCompatActivity {
@@ -40,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         initializeView();
         setUpDrawerLayout();
 
-        final String[] values = new String[] { "Projects","Logout"};
+        final String[] values = new String[] { "Projects","Show Data","Logout"};
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_1, android.R.id.text1, values);
@@ -68,6 +69,11 @@ public class MainActivity extends AppCompatActivity {
                 fragmentManager.beginTransaction().replace(R.id.content_frame,fragment).commit();
                 break;
             case 1:
+                Fragment fragment1 = new ShowAllTask(getApplicationContext());
+                FragmentManager fragmentManager1= getFragmentManager();
+                fragmentManager1.beginTransaction().replace(R.id.content_frame,fragment1).commit();
+                break;
+            case 2:
                 SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
                 SharedPreferences.Editor toEdit = prefs.edit();
                 toEdit.putBoolean(Constants.IS_LOGGED_IN, false);
