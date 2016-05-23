@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         initializeView();
         setUpDrawerLayout();
 
-        final String[] values = new String[]{"Projects", "Add Model", "EmployeeFragment", "Add Domain", "Logout"};
+        final String[] values = new String[]{"Projects", "Add Model", "EmployeeFragment", "Add Domain",  "ShowAllTask" ,"Logout"};
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_1, android.R.id.text1, values);
@@ -93,9 +93,9 @@ public class MainActivity extends AppCompatActivity {
 
 
             case 4:
-                Fragment fragment1 = new ShowAllTask(getApplicationContext());
-                FragmentManager fragmentManager1= getFragmentManager();
-                fragmentManager1.beginTransaction().replace(R.id.content_frame,fragment1).commit();
+                Fragment fragment4 = new ShowAllTask(getApplicationContext());
+                FragmentManager fragmentManager4= getFragmentManager();
+                fragmentManager4.beginTransaction().replace(R.id.content_frame,fragment4).commit();
                 break;
             case 5:
                 SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
@@ -106,7 +106,6 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this, SplashActivity.class);
                 startActivity(intent);
                 break;
-
 
         }
     }
