@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -58,8 +59,10 @@ public class ProjectsFragments extends Fragment {
                 int itemPosition = position;
                 String  itemValue = (String) listView.getItemAtPosition(position);
                 if(itemPosition <= project.size()) {
-
                     Fragment fragment = new AddTaskFragment(context);
+                    Bundle bundle=new Bundle();
+                    bundle.putString("Project", ""+((TextView)view.findViewById(R.id.project)).getText().toString());
+                    fragment.setArguments(bundle);
                     FragmentManager fragmentManager = getFragmentManager();
                     fragmentManager.beginTransaction().replace(R.id.content_frame,fragment).addToBackStack(null).commit();
                 }

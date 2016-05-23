@@ -16,12 +16,12 @@ public class DailyTaskDB extends SQLiteOpenHelper {
 
     public static final String DATABASE_NAME = "DailyTaskdb";
     public static final String TABLE_TASK = "DailyTask";
-    public static final String ID = "id";
+    public static final String ID = "_id";
     public static final String Task = "task";
     public static final String Date = "date";
     public static final String PROJECT = "project";
     public static final String PROJECT_TABLE = "ProjectTable";
-    public static final String PROJECT_NAME = "Project Name";
+    public static final String PROJECT_NAME_FIELD = "ProjectName";
     private static final int DATABASE_VERSION = 2;
 
     public DailyTaskDB(Context context) {
@@ -33,8 +33,8 @@ public class DailyTaskDB extends SQLiteOpenHelper {
         String task = " CREATE TABLE " + TABLE_TASK + " ( " + ID + "  INTEGER PRIMARY KEY autoincrement , " + Task + " TEXT, " +
                 Date +" Text, "+  PROJECT +" Text "+")";
 
-        String project = "CREATE TABLE " + PROJECT_TABLE + " ( " + ID + " Integer PRIMARY KEY autoincrement, " +
-                PROJECT_NAME + " TEXT " + " ) ";
+        String project = "CREATE TABLE " + PROJECT_TABLE + " ( " + ID + " Integer PRIMARY KEY autoincrement , " +
+                PROJECT_NAME_FIELD + " TEXT " + " ) ";
 
         db.execSQL(task);
         db.execSQL(project);

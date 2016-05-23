@@ -20,6 +20,7 @@ import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
 import android.widget.ListView;
 
+import com.truedev.officeoffice.ApplicationController;
 import com.truedev.officeoffice.Constants;
 import com.truedev.officeoffice.Fragments.ProjectsFragments;
 import com.truedev.officeoffice.Fragments.ShowAllTask;
@@ -37,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.drawer_layout);
-
+        ApplicationController.insertProject();
         initializeView();
         setUpDrawerLayout();
 
@@ -54,7 +55,6 @@ public class MainActivity extends AppCompatActivity {
                 selectItem(position);
                 drawerLayout.closeDrawers();
             }
-
 
         });
 

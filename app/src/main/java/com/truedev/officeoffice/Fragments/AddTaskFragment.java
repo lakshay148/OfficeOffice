@@ -35,6 +35,7 @@ public class AddTaskFragment extends Fragment {
     ImageView addTask;
     ListView listView;
     Button save;
+    String project;
     private ArrayList<RowData> items = new ArrayList<RowData>();
     private ArrayList<String> task = new ArrayList<String>();
     AddTaskAdapter dynamicAdapter;
@@ -47,6 +48,8 @@ public class AddTaskFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.add_layout,container,false);
+
+        project=getArguments().getString("Project");
 
         editText = (EditText)view.findViewById(R.id.get_task);
         addTask = (ImageView)view.findViewById(R.id.add_task);
@@ -82,7 +85,7 @@ public class AddTaskFragment extends Fragment {
                     task.add(textView.getText()+"");
                 }
                 DBFunctions dailyTaskDB = new DBFunctions();
-                long getSuccess= dailyTaskDB.insertTask(task,CommonUtils.getCurrentDate());
+                long getSuccess= dailyTaskDB.insertTask(task,CommonUtils.getCurrentDate(),project);
                 if(getSuccess>=1) {
                     Toast.makeText(getActivity(),"Data Added Successfully",Toast.LENGTH_LONG).show();
                 }
