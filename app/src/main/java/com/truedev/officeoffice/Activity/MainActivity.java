@@ -22,6 +22,9 @@ import android.widget.ListView;
 
 import com.truedev.officeoffice.ApplicationController;
 import com.truedev.officeoffice.Constants;
+import com.truedev.officeoffice.Fragments.AddDomainFragment;
+import com.truedev.officeoffice.Fragments.AddModelFragment;
+import com.truedev.officeoffice.Fragments.EmployeeFragment;
 import com.truedev.officeoffice.Fragments.ProjectsFragments;
 import com.truedev.officeoffice.Fragments.ShowAllTask;
 import com.truedev.officeoffice.R;
@@ -42,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         initializeView();
         setUpDrawerLayout();
 
-        final String[] values = new String[] { "Projects","Show Data","Logout"};
+        final String[] values = new String[]{"Projects", "Add Model", "EmployeeFragment", "Add Domain", "Logout"};
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_1, android.R.id.text1, values);
@@ -66,14 +69,35 @@ public class MainActivity extends AppCompatActivity {
                 Fragment fragment = new ProjectsFragments(getApplicationContext());
                 getSupportActionBar().setTitle("Projects");
                 FragmentManager fragmentManager = getFragmentManager();
-                fragmentManager.beginTransaction().replace(R.id.content_frame,fragment).commit();
+                fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
                 break;
+
             case 1:
+                Fragment fragment1 = new AddModelFragment(getApplicationContext());
+                getSupportActionBar().setTitle("Add Model");
+                FragmentManager fragmentManager1 = getFragmentManager();
+                fragmentManager1.beginTransaction().replace(R.id.content_frame, fragment1).commit();
+                break;
+            case 2:
+                Fragment fragment2 = new EmployeeFragment(getApplicationContext());
+                getSupportActionBar().setTitle("EmployeeFragment");
+                FragmentManager fragmentManager2 = getFragmentManager();
+                fragmentManager2.beginTransaction().replace(R.id.content_frame, fragment2).commit();
+                break;
+            case 3:
+                Fragment fragment3 = new AddDomainFragment(getApplicationContext());
+                getSupportActionBar().setTitle("AddDomainFragment");
+                FragmentManager fragmentManager3 = getFragmentManager();
+                fragmentManager3.beginTransaction().replace(R.id.content_frame, fragment3).commit();
+                break;
+
+
+            case 4:
                 Fragment fragment1 = new ShowAllTask(getApplicationContext());
                 FragmentManager fragmentManager1= getFragmentManager();
                 fragmentManager1.beginTransaction().replace(R.id.content_frame,fragment1).commit();
                 break;
-            case 2:
+            case 5:
                 SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
                 SharedPreferences.Editor toEdit = prefs.edit();
                 toEdit.putBoolean(Constants.IS_LOGGED_IN, false);
@@ -82,6 +106,8 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this, SplashActivity.class);
                 startActivity(intent);
                 break;
+
+
         }
     }
 
@@ -97,25 +123,23 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onPostCreate(Bundle savedInstanceState)
-    {
+    protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
         mDrawerToggle.syncState();
     }
 
     @Override
-    public void onConfigurationChanged(Configuration newConfig)
-    {
+    public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         mDrawerToggle.onConfigurationChanged(newConfig);
     }
 
-    public  void setUpDrawerLayout() {
+    public void setUpDrawerLayout() {
 
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        mDrawerToggle = new ActionBarDrawerToggle(this,drawerLayout,0,0) {
+        mDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, 0, 0) {
 
             public void onDrawerClosed(View drawerView) {
                 super.onDrawerClosed(drawerView);
@@ -135,7 +159,7 @@ public class MainActivity extends AppCompatActivity {
     private void initializeView() {
         listView = (ListView) findViewById(R.id.list);
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
-        drawerLayout = (DrawerLayout)findViewById(R.id.drawer);
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer);
         mFrameLayout = (FrameLayout) findViewById(R.id.content_frame);
     }
 
@@ -145,7 +169,8 @@ public class MainActivity extends AppCompatActivity {
         Fragment fragment = new ProjectsFragments(getApplicationContext());
         getSupportActionBar().setTitle("Projects");
         FragmentManager fragmentManager = getFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.content_frame,fragment).commit();
+        fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+
     }
 
     @Override

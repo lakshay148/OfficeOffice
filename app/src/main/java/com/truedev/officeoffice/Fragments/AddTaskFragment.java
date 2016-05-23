@@ -1,7 +1,9 @@
 package com.truedev.officeoffice.Fragments;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -16,6 +18,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.truedev.officeoffice.Activity.MainActivity;
+import com.truedev.officeoffice.Adapter.DynamicAdapter;
 import com.truedev.officeoffice.Adapter.AddTaskAdapter;
 import com.truedev.officeoffice.CommonUtils;
 import com.truedev.officeoffice.DBFunctions;
@@ -34,6 +38,7 @@ public class AddTaskFragment extends Fragment {
     EditText editText,date;
     ImageView addTask;
     ListView listView;
+
     Button save;
     String project;
     private ArrayList<RowData> items = new ArrayList<RowData>();
@@ -88,11 +93,18 @@ public class AddTaskFragment extends Fragment {
                 long getSuccess= dailyTaskDB.insertTask(task,CommonUtils.getCurrentDate(),project);
                 if(getSuccess>=1) {
                     Toast.makeText(getActivity(),"Data Added Successfully",Toast.LENGTH_LONG).show();
+                    moveToNewActivity();
                 }
             }
         });
 
 
         return view;
+    }
+    private void moveToNewActivity() {
+        Intent i = new Intent(getActivity(), MainActivity.class);
+        startActivity(i);
+        ((Activity) getActivity()).overridePendingTransition(0, 0);
+
     }
 }
