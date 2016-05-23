@@ -2,6 +2,7 @@ package com.truedev.officeoffice;
 
 import android.content.ContentValues;
 import android.database.Cursor;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
@@ -15,17 +16,22 @@ import java.util.ArrayList;
 public class DBFunctions {
 
     public long insertTask(ArrayList<String> data, String date) {
-        long success = 0;
         SQLiteDatabase db = ApplicationController.getTasksDB(true);
-        db.beginTransaction();
+        long success = 0;
+        try{
+            db.beginTransaction();
+            ContentValues values = new ContentValues();
+            for(int i= 0; i<data.size();i++) {
+                values.put(DailyTaskDB.Task,data.get(i));
+                values.put(DailyTaskDB.Date,date);
+                success = db.insert(DailyTaskDB.TABLE_TASK, null,values);
+            }
 
-        ContentValues values = new ContentValues();
-        for(int i= 0; i<data.size();i++) {
-            values.put(DailyTaskDB.Task,data.get(i));
-            values.put(DailyTaskDB.Date,date);
-            success = db.insert(DailyTaskDB.TABLE_TASK, null,values);
+        } catch (SQLException e){
+            e.printStackTrace();
+        } finally {
+            db.setTransactionSuccessful();
         }
-        db.close();
         return success;
     }
 
