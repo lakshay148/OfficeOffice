@@ -12,6 +12,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -24,6 +25,7 @@ import com.truedev.officeoffice.Fragments.AddDomainFragment;
 import com.truedev.officeoffice.Fragments.AddModelFragment;
 import com.truedev.officeoffice.Fragments.EmployeeFragment;
 import com.truedev.officeoffice.Fragments.ProjectsFragments;
+import com.truedev.officeoffice.Fragments.ShowAllTask;
 import com.truedev.officeoffice.R;
 
 public class MainActivity extends AppCompatActivity {
@@ -91,6 +93,11 @@ public class MainActivity extends AppCompatActivity {
 
 
             case 4:
+                Fragment fragment1 = new ShowAllTask(getApplicationContext());
+                FragmentManager fragmentManager1= getFragmentManager();
+                fragmentManager1.beginTransaction().replace(R.id.content_frame,fragment1).commit();
+                break;
+            case 5:
                 SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
                 SharedPreferences.Editor toEdit = prefs.edit();
                 toEdit.putBoolean(Constants.IS_LOGGED_IN, false);
@@ -164,5 +171,19 @@ public class MainActivity extends AppCompatActivity {
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (drawerLayout.isDrawerOpen(Gravity.LEFT)) {
+            drawerLayout.closeDrawers();
+        } else {
+            if (getSupportFragmentManager().getBackStackEntryCount()> 0) {
+                getSupportFragmentManager().popBackStack();
+
+            } else {
+                super.onBackPressed();
+            }
+        }
     }
 }
