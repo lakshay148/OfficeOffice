@@ -20,6 +20,7 @@ import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
 import android.widget.ListView;
 
+import com.truedev.officeoffice.ApplicationController;
 import com.truedev.officeoffice.Constants;
 import com.truedev.officeoffice.Fragments.AddDomainFragment;
 import com.truedev.officeoffice.Fragments.AddModelFragment;
@@ -42,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.drawer_layout);
-
+        ApplicationController.insertProject();
         initializeView();
         setUpDrawerLayout();
 
@@ -60,7 +61,6 @@ public class MainActivity extends AppCompatActivity {
                 drawerLayout.closeDrawers();
             }
 
-
         });
 
     }
@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
     private void selectItem(int position) {
         switch (position) {
             case 0:
-                Fragment fragment = new ProjectsFragments(getApplicationContext());
+                Fragment fragment = new ProjectsFragments();
                 getSupportActionBar().setTitle("Projects");
                 FragmentManager fragmentManager = getFragmentManager();
                 fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
@@ -120,7 +120,6 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this, SplashActivity.class);
                 startActivity(intent);
                 break;
-
 
         }
     }
@@ -180,7 +179,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        Fragment fragment = new ProjectsFragments(getApplicationContext());
+        Fragment fragment = new ProjectsFragments();
         getSupportActionBar().setTitle("Projects");
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();

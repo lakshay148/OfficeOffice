@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.truedev.officeoffice.Activity.MainActivity;
+import com.truedev.officeoffice.DBFunctions;
 import com.truedev.officeoffice.Database.DailyTaskDB;
 import com.truedev.officeoffice.R;
 
@@ -46,7 +47,7 @@ public class AddDomainFragment extends Fragment {
                     Toast.makeText(getActivity(), "Field Vaccant", Toast.LENGTH_LONG).show();
                     return;
                 } else {
-                    DailyTaskDB dailyTaskDB = new DailyTaskDB(context);
+                    DBFunctions dailyTaskDB = new DBFunctions();
                     dailyTaskDB.insertEntryAddDomain(namedomain);
                     Toast.makeText(getActivity(), "Account Successfully Created ", Toast.LENGTH_LONG).show();
                     moveToNewActivity();

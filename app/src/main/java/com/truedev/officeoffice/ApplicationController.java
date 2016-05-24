@@ -5,6 +5,8 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.truedev.officeoffice.Database.DailyTaskDB;
 
+import java.util.ArrayList;
+
 /**
  * Created by dipanshugarg on 20/5/16.
  */
@@ -27,5 +29,16 @@ public class ApplicationController extends Application {
             return dailyTaskDB.getReadableDatabase();
     }
 
+    public static void insertProject() {
+        ArrayList<String> project = new ArrayList<>();
+        project.add("SFA");
+        project.add("Auction");
+        project.add("Evaluator");
+        project.add("Gcloud");
+        project.add("Gcloud");
+        project.add("Gcloud IOS");
+        DBFunctions dbFunctions = new DBFunctions();
+        dbFunctions.insertInProjectTable(project);
+    }
 }
 
