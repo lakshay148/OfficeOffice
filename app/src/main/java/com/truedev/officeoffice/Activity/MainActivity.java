@@ -90,12 +90,10 @@ public class MainActivity extends AppCompatActivity {
                 FragmentManager fragmentManager3 = getFragmentManager();
                 fragmentManager3.beginTransaction().replace(R.id.content_frame, fragment3).commit();
                 break;
-
-
             case 4:
-                Fragment fragment1 = new ShowAllTask(getApplicationContext());
-                FragmentManager fragmentManager1= getFragmentManager();
-                fragmentManager1.beginTransaction().replace(R.id.content_frame,fragment1).commit();
+                Fragment fragment4 = new ShowAllTask(getApplicationContext());
+                FragmentManager fragmentManager4= getFragmentManager();
+                fragmentManager4.beginTransaction().replace(R.id.content_frame,fragment4).commit();
                 break;
             case 5:
                 SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);

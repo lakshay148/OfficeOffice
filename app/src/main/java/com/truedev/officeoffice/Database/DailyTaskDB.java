@@ -28,7 +28,6 @@ public class DailyTaskDB extends SQLiteOpenHelper {
     public static final String Domain = "domain";
     public static final String Password = "password";
 
-    private static final int DATABASE_VERSION = 1;
     public static final String Date = "date";
     public static final String PROJECT = "project";
     private static final int DATABASE_VERSION = 2;
@@ -40,9 +39,6 @@ public class DailyTaskDB extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-
-        String task = " CREATE TABLE " + TABLE_TASK +
-                " ( " + ID + "  INTEGER PRIMARY KEY autoincrement , " + Task + " TEXT " + ")";
 
         String CREATE_Emp_ADD_MODEL_TABLE = "create table " + TABLE_ADD_MODEL +
                 "( " + "ID" + " integer primary key autoincrement," + "EMPID text,OWNER text ,DOMAIN text); ";
