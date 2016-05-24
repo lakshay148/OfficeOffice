@@ -19,7 +19,6 @@ import android.widget.Toast;
 
 
 import com.truedev.officeoffice.Activity.MainActivity;
-import com.truedev.officeoffice.Adapter.DynamicAdapter;
 import com.truedev.officeoffice.Adapter.AddTaskAdapter;
 import com.truedev.officeoffice.CommonUtils;
 import com.truedev.officeoffice.DBFunctions;
