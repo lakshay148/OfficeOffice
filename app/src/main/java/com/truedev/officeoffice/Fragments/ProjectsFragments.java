@@ -25,13 +25,11 @@ import java.util.ArrayList;
 
 public class ProjectsFragments extends Fragment {
 
-    Context context;
     ListView listView;
     ArrayList<String> project;
 
+    public ProjectsFragments() {
 
-    public ProjectsFragments(Context applicationContext) {
-        this.context= applicationContext;
     }
 
     @Nullable
@@ -49,7 +47,7 @@ public class ProjectsFragments extends Fragment {
         project.add("Gcloud");
         project.add("Gcloud IOS");
 
-        ProjectsAdapter projectsAdapter = new ProjectsAdapter(context , project);
+        ProjectsAdapter projectsAdapter = new ProjectsAdapter(getActivity() , project);
 
         listView.setAdapter(projectsAdapter);
 
@@ -59,14 +57,14 @@ public class ProjectsFragments extends Fragment {
                 int itemPosition = position;
                 String  itemValue = (String) listView.getItemAtPosition(position);
                 if(itemPosition <= project.size()) {
-                    Fragment fragment = new AddTaskFragment(context);
+                    Fragment fragment = new AddTaskFragment(getActivity());
                     Bundle bundle=new Bundle();
                     bundle.putString("Project", ""+((TextView)view.findViewById(R.id.project)).getText().toString());
                     fragment.setArguments(bundle);
                     FragmentManager fragmentManager = getFragmentManager();
                     fragmentManager.beginTransaction().replace(R.id.content_frame,fragment).addToBackStack(null).commit();
                 }
-                Toast.makeText(context, itemValue , Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), itemValue , Toast.LENGTH_LONG).show();
             }
         });
 

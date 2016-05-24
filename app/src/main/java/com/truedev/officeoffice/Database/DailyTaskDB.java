@@ -11,8 +11,8 @@ public class DailyTaskDB extends SQLiteOpenHelper {
     public static final String TABLE_TASK = "DailyTask";
     public static final String ID = "_id";
     public static final String TABLE_ADD_MODEL = "AddModelFragment";
-    private static final String TABLE_EMPLOYEE = "EmployeeFragment";
-    private static final String TABLE_ADDDOMAIN = "DomainFragment";
+    public static final String TABLE_EMPLOYEE = "EmployeeFragment";
+    public static final String TABLE_ADDDOMAIN = "DomainFragment";
     public static final String Task = "task";
     public static final String Name = "name";
     public static final String EID = "eID";
@@ -43,7 +43,7 @@ public class DailyTaskDB extends SQLiteOpenHelper {
         String addDomain = "CREATE TABLE " + TABLE_ADDDOMAIN +
                 "( " + "ID" + " integer primary key autoincrement," + "DOMAINNAME text); ";
 
-        String task = " CREATE TABLE " + TABLE_TASK + " ( " + ID + "  INTEGER PRIMARY KEY autoincrement , " + Task + " TEXT, " +
+        String task = " CREATE TABLE " + TABLE_TASK + " ( " + ID + "  INTEGER PRIMARY KEY autoincrement , " + Task + " BLOB, " +
                 Date +" Text, "+  PROJECT +" Text "+")";
 
         String project = "CREATE TABLE " + PROJECT_TABLE + " ( " + ID + " Integer PRIMARY KEY autoincrement , " +
@@ -67,33 +67,4 @@ public class DailyTaskDB extends SQLiteOpenHelper {
 
     }
 
-
-
-    public void insertEntryADDModel( String empID,String domain, String role) {
-        ContentValues newValues = new ContentValues();
-        SQLiteDatabase db = this.getWritableDatabase();
-        newValues.put("EmpID", empID);
-        newValues.put("Owner", domain);
-        newValues.put("ROLE", role);
-        db.insert(TABLE_ADD_MODEL, null, newValues);
-    }
-
-    public void insertEntry(String empName, String owner, String empID, String domain) {
-        ContentValues newValues = new ContentValues();
-        SQLiteDatabase db = this.getWritableDatabase();
-        newValues.put("EMPNAME", empName);
-        newValues.put("EmpID", empID);
-        newValues.put("PASSWORD", owner);
-        newValues.put("ROLE", domain);
-        db.insert(TABLE_EMPLOYEE, null, newValues);
-        db.close();
-    }
-
-    public void insertEntryAddDomain(String addDomain) {
-        ContentValues newValues = new ContentValues();
-        SQLiteDatabase db = this.getWritableDatabase();
-        newValues.put("DOMAINNAME", addDomain);
-        db.insert(TABLE_ADDDOMAIN, null, newValues);
-        db.close();
-    }
 }

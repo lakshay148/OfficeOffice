@@ -37,9 +37,9 @@ public class AddTaskFragment extends Fragment {
     EditText editText,date;
     ImageView addTask;
     ListView listView;
-
     Button save;
     String project;
+    TextView dataTask;
     private ArrayList<RowData> items = new ArrayList<RowData>();
     private ArrayList<String> task = new ArrayList<String>();
     AddTaskAdapter dynamicAdapter;
@@ -84,11 +84,12 @@ public class AddTaskFragment extends Fragment {
                 task.clear();
                 int count = listView.getCount();
                 for (int i = 0; i<count ; i++ ) {
-                    View view = listView.getChildAt(i);
-                    TextView textView = (TextView) view.findViewById(R.id.data);
-                    task.add(textView.getText()+"");
+                    View view2 = listView.getChildAt(i);
+                    dataTask= (TextView) view2.findViewById(R.id.data);
+                    task.add(dataTask.getText().toString());
                 }
                 DBFunctions dailyTaskDB = new DBFunctions();
+
                 long getSuccess= dailyTaskDB.insertTask(task,CommonUtils.getCurrentDate(),project);
                 if(getSuccess>=1) {
                     Toast.makeText(getActivity(),"Data Added Successfully",Toast.LENGTH_LONG).show();
@@ -104,6 +105,5 @@ public class AddTaskFragment extends Fragment {
         Intent i = new Intent(getActivity(), MainActivity.class);
         startActivity(i);
         ((Activity) getActivity()).overridePendingTransition(0, 0);
-
     }
 }

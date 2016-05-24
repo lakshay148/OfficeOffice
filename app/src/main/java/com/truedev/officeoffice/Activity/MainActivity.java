@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
     private void selectItem(int position) {
         switch (position) {
             case 0:
-                Fragment fragment = new ProjectsFragments(getApplicationContext());
+                Fragment fragment = new ProjectsFragments();
                 getSupportActionBar().setTitle("Projects");
                 FragmentManager fragmentManager = getFragmentManager();
                 fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
@@ -165,7 +165,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        Fragment fragment = new ProjectsFragments(getApplicationContext());
+        Fragment fragment = new ProjectsFragments();
         getSupportActionBar().setTitle("Projects");
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();

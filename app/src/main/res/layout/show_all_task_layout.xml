@@ -11,10 +11,12 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/white"
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/project"
+            android:id="@+id/pro"
+            android:textColor="@color/black"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Project:"
@@ -22,12 +24,17 @@
 
         <TextView
             android:id="@+id/date"
+            android:textColor="@color/black"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Date:"
             android:padding="10dp" />
 
-        <include layout="@layout/project_layout" />
+        <ListView
+            android:id="@+id/task_list"
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></ListView>
 
     </LinearLayout>
 
