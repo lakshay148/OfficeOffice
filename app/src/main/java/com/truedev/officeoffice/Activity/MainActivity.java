@@ -23,6 +23,8 @@ import android.widget.ListView;
 import com.truedev.officeoffice.Constants;
 import com.truedev.officeoffice.Fragments.AddDomainFragment;
 import com.truedev.officeoffice.Fragments.AddModelFragment;
+import com.truedev.officeoffice.Fragments.AddPrivilegeFragment;
+import com.truedev.officeoffice.Fragments.AddRoleFragment;
 import com.truedev.officeoffice.Fragments.EmployeeFragment;
 import com.truedev.officeoffice.Fragments.ProjectsFragments;
 import com.truedev.officeoffice.Fragments.ShowAllTask;
@@ -44,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
         initializeView();
         setUpDrawerLayout();
 
-        final String[] values = new String[]{"Projects", "Add Model", "EmployeeFragment", "Add Domain", "Logout"};
+        final String[] values = new String[]{"Projects", "Add Model", "EmployeeFragment", "Add Domain", "Add Privilege","Add Role","Logout"};
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_1, android.R.id.text1, values);
@@ -91,11 +93,25 @@ public class MainActivity extends AppCompatActivity {
                 fragmentManager3.beginTransaction().replace(R.id.content_frame, fragment3).commit();
                 break;
             case 4:
-                Fragment fragment4 = new ShowAllTask(getApplicationContext());
-                FragmentManager fragmentManager4= getFragmentManager();
-                fragmentManager4.beginTransaction().replace(R.id.content_frame,fragment4).commit();
+                Fragment fragment4 = new AddPrivilegeFragment(getApplicationContext());
+                getSupportActionBar().setTitle("AddPrivilegeFragment");
+                FragmentManager fragmentManager4 = getFragmentManager();
+                fragmentManager4.beginTransaction().replace(R.id.content_frame, fragment4).commit();
                 break;
             case 5:
+                Fragment fragment5 = new AddRoleFragment(getApplicationContext());
+                getSupportActionBar().setTitle("AddRoleFragment");
+                FragmentManager fragmentManager5 = getFragmentManager();
+                fragmentManager5.beginTransaction().replace(R.id.content_frame, fragment5).commit();
+                break;
+
+            case 6:
+                Fragment fragment6= new ShowAllTask(getApplicationContext());
+                FragmentManager fragmentManager6= getFragmentManager();
+                fragmentManager6.beginTransaction().replace(R.id.content_frame,fragment6).commit();
+                break;
+
+            case 7:
                 SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
                 SharedPreferences.Editor toEdit = prefs.edit();
                 toEdit.putBoolean(Constants.IS_LOGGED_IN, false);
