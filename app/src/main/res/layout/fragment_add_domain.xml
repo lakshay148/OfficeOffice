@@ -28,7 +28,7 @@
             android:layout_alignParentRight="true"
             android:layout_marginLeft="5dp"
             android:layout_toRightOf="@+id/domainname"
-            android:hint="Add Domain" />
+            android:hint="@string/domain_hint" />
 
         <Button
             android:id="@+id/add"
@@ -37,7 +37,7 @@
             android:layout_below="@+id/adddomain"
             android:layout_marginLeft="150dp"
             android:gravity="center"
-            android:text="Submit" />
+            android:text="@string/submit" />
     </RelativeLayout>
 
 </FrameLayout>

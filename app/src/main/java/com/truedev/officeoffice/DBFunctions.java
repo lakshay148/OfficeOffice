@@ -269,8 +269,26 @@ public class DBFunctions {
 
 
     }
+    public static void insertUserRole(UserData userData) {
 
+        SQLiteDatabase db = ApplicationController.getTasksDB(true);
 
+        db.beginTransaction();
+        try {
+            ContentValues values = new ContentValues();
+            values.put(DailyTaskDB.EMPNNAME,userData.roleName);
+            values.put(DailyTaskDB._CHK_VALUES,userData.chekBoolen);
+            db.insertOrThrow(DailyTaskDB.TABLE_ADDROLE, null, values);
+            db.setTransactionSuccessful();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            Log.d(DailyTaskDB.TAG, "Error while trying to add post to database");
+        } finally {
+
+            db.endTransaction();
+        }
+
+    }
     public static synchronized DailyTaskDB getInstance(Context context) {
 
         if (DailyTaskDB.mDbHelper == null) {

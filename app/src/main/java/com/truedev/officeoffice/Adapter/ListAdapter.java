@@ -19,25 +19,23 @@ import java.util.List;
 
 
 public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder> {
-
-    private Context context;
+    private LayoutInflater minflater;
+    private Context mcontext;
     private List<UserData> dataList = new ArrayList<>();
-    private LayoutInflater inflater;
-    private Listener listener;
+    private Listener mListner;
 
     public ListAdapter(Context context, List<UserData> dataList1) {
 
-        this.context = context;
+        this.mcontext = context;
         this.dataList = dataList1;
-      //  this.listener = (Listener) context;
-        inflater = LayoutInflater.from(context);
+        minflater = LayoutInflater.from(context);
 
     }
 
     @Override
     public ListViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        View convertView = inflater.inflate(R.layout.row, parent, false);
+        View convertView = minflater.inflate(R.layout.row, parent, false);
         ListViewHolder viewHolder = new ListViewHolder(convertView);
         return viewHolder;
     }
@@ -51,15 +49,19 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
         holder.checkBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                holder.checkBox.setChecked(true);
-                Toast.makeText(context, dataList.get(position).getName(), Toast.LENGTH_SHORT).show();
+                CheckBox cb = (CheckBox) v;
+                UserData _state = (UserData) cb.getTag();
+                Toast.makeText(mcontext, "Clicked on Checkbox: " + cb.getText() + " is " + cb.isChecked(),
+                        Toast.LENGTH_LONG).show();
+
+                holder.checkBox.setSelected(cb.isChecked());
             }
         });
 
         holder.iv_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listener.nameToChnge(dataList.get((Integer) v.getTag()).name);
+                mListner.nameToChnge(dataList.get((Integer) v.getTag()).name);
 
 
             }

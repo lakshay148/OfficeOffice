@@ -5,6 +5,10 @@ import java.io.Serializable;
 
 public class UserData implements Serializable {
 
+    public String name ="";
+    public String roleName="";
+    public boolean chekBoolen=false;
+
     public String getName() {
         return name;
     }
@@ -21,7 +25,11 @@ public class UserData implements Serializable {
         this.chekBoolen = chekBoolen;
     }
 
-    public String name ="";
-    public boolean chekBoolen=false;
+    public String getRoleName() {
+        return roleName;
+    }
 
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
+    }
 }

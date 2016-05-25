@@ -61,7 +61,6 @@ public class ProjectsFragment extends Fragment {
         project.add("Auction");
         project.add("Evaluator");
         project.add("Gcloud");
-        project.add("Gcloud");
         project.add("Gcloud IOS");
 
         ProjectsAdapter projectsAdapter = new ProjectsAdapter(getActivity() , project);

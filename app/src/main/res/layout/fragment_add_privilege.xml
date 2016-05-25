@@ -14,7 +14,7 @@
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:layout_margin="10dp"
-            android:hint="Enter your name" />
+            android:hint="@string/prvlg_hint" />
 
 
         <Button
@@ -25,7 +25,7 @@
             android:layout_centerHorizontal="true"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
-            android:text="Submit" />
+            android:text="@string/submit" />
     </LinearLayout>
 
 </FrameLayout>

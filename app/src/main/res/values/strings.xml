@@ -13,4 +13,8 @@
     <string name="saprater">:</string>
     <string name="submit">submit</string>
     <string name="domain_name">Domain</string>
+    <string name="add_role">Add Role</string>
+    <string name="role_hint">Enter new role</string>
+    <string name="prvlg_hint">Add privilege</string>
+    <string name="domain_hint">Add Domain</string>
 </resources>

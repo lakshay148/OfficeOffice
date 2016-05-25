@@ -19,41 +19,42 @@ import com.truedev.officeoffice.R;
 
 /**
  * A simple {@link Fragment} subclass.
- * @author ?
- * Fragment instantiation with newInstance Done
- * private member fields
- * member fields should start with m
- * strings to be referred from strings.xml
+ * @author ?                                /done
+ * Fragment instantiation with newInstance  /done
+ * private member fields                    /done
+ * member fields should start with m         /done
+ * strings to be referred from strings.xml   /done
  */
 public class AddDomainFragment extends Fragment {
-    Context mContext;
-    EditText editTextdomainname;
-    Button button;
+   private Context mcontext;
+   private EditText meditTextdomainname;
+   private Button mbutton;
 
     public static AddDomainFragment newInstance(Context applicationContext) {
-        AddDomainFragment fragment = new AddDomainFragment();
-        fragment.mContext = applicationContext;
+        AddDomainFragment fragment= new  AddDomainFragment();
+        fragment.mcontext=applicationContext;
         return fragment;
-
     }
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_add_domain, container, false);
-        editTextdomainname = (EditText) view.findViewById(R.id.adddomain);
-        button = (Button) view.findViewById(R.id.add);
+        meditTextdomainname = (EditText) view.findViewById(R.id.adddomain);
+        mbutton = (Button) view.findViewById(R.id.add);
 
-        button.setOnClickListener(new View.OnClickListener() {
+        mbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String namedomain = editTextdomainname.getText().toString();
+                String namedomain = meditTextdomainname.getText().toString();
                 if (namedomain.equals("")) {
                     Toast.makeText(getActivity(), "Field Vaccant", Toast.LENGTH_LONG).show();
                     return;
                 } else {
                     DBFunctions dailyTaskDB = new DBFunctions();
                     dailyTaskDB.insertEntryAddDomain(namedomain);
-                    Toast.makeText(getActivity(), "Account Successfully Created ", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), "Doamin Successfully Added", Toast.LENGTH_LONG).show();
                     moveToNewActivity();
                 }
             }

@@ -33,7 +33,7 @@ public class DailyTaskDB extends SQLiteOpenHelper {
     public static final String _ID = "_id";
     public static final String NAME = "name";
     public static final String EMPNNAME = "empname";
-    public String _CHK_VALUES = "checkbox_value";
+    public static final String _CHK_VALUES = "checkbox_value";
     public static DailyTaskDB mDbHelper;
 
 

@@ -21,43 +21,43 @@ import com.truedev.officeoffice.R;
 
 /**
  * A simple {@link Fragment} subclass.
+ * @author ?    Ankita                            /done
  *
- * @author ?
- *         <p>
- *         Fragment instantiation with newInstance
- *         private member fields
- *         member fields should start with m
- *         strings to be referred from strings.xml
+ * Fragment instantiation with newInstance  /done
+ * private member fields                    /done
+ * member fields should start with m        /done
+ * strings to be referred from strings.xml  /done
  */
 public class AddPrivilegeFragment extends Fragment {
-    EditText et_name;
-    Button btn_next;
-    DailyTaskDB dbHelper;
-    Context mContext;
+   private EditText met_name;
+   private Button mbtn_next;
+   private Context mcontext;
+
 
     public static AddPrivilegeFragment newInstance(Context applicationContext) {
         AddPrivilegeFragment fragment = new AddPrivilegeFragment();
-        fragment.mContext = applicationContext;
+        fragment.mcontext=applicationContext;
         return fragment;
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_add_privilege, container, false);
-        dbHelper = DBFunctions.getInstance(getActivity());
-
-        et_name = (EditText) view.findViewById(R.id.et_name);
-        btn_next = (Button) view.findViewById(R.id.btn_next);
 
 
-        btn_next.setOnClickListener(new View.OnClickListener() {
+        met_name = (EditText) view.findViewById(R.id.et_name);
+        mbtn_next = (Button) view.findViewById(R.id.btn_next);
+
+
+        mbtn_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 UserData userData = new UserData();
 
-                if (!et_name.getText().toString().isEmpty()) {
-                    userData.name = et_name.getText().toString();
+                if (!met_name.getText().toString().isEmpty()) {
+                    userData.name = met_name.getText().toString();
                 } else {
                     userData.name = "";
                 }
