@@ -31,7 +31,6 @@
             android:layout_height="wrap_content" />
         <EditText
             android:layout_below="@+id/idOfEmployee"
-            android:drawableLeft="@drawable/email"
             android:id="@+id/empId"
             android:drawablePadding="8dp"
             android:paddingRight="10dp"
@@ -51,7 +50,6 @@
             android:layout_height="wrap_content" />
         <EditText
             android:layout_below="@+id/pass"
-            android:drawableLeft="@drawable/key"
             android:id="@+id/editPassword"
             android:drawablePadding="8dp"
             android:paddingRight="50dp"
