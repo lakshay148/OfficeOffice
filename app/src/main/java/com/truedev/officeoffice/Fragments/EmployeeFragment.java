@@ -23,6 +23,13 @@ import com.truedev.officeoffice.R;
 
 /**
  * A simple {@link Fragment} subclass.
+ *
+ * @author : ?
+ * Fragment instantiation with newInstance
+ * private member fields
+ * member fields should start with m
+ * strings to be referred from strings.xml
+ *
  */
 public class EmployeeFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemSelectedListener {
     private String[] role = {"R1", "R2", "R3", "R4"};

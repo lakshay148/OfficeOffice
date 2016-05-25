@@ -22,6 +22,13 @@ import java.util.ArrayList;
 
 /**
  * Created by dipanshugarg on 20/5/16.
+ *
+ * Fragment instantiation with newInstance
+ * private member fields
+ * member fields should start with m
+ * strings to be referred from strings.xml
+ *
+ * show all task not working
  */
 public class ShowAllTask extends Fragment {
 

@@ -26,6 +26,16 @@ import com.truedev.officeoffice.R;
 
 import java.util.ArrayList;
 
+/**
+ * @author ?
+ * Fragment instantiation with newInstance
+ * private member fields
+ * member fields should start with m
+ * strings to be referred from strings.xml
+ *
+ * Role not being inserted in db
+ */
+
 
 public class AddRoleFragment extends Fragment implements Listener, View.OnClickListener {
     Context context;

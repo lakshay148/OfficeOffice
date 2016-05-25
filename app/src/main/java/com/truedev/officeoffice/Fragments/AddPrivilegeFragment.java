@@ -20,6 +20,12 @@ import com.truedev.officeoffice.R;
 
 /**
  * A simple {@link Fragment} subclass.
+ * @author ?
+ *
+ * Fragment instantiation with newInstance
+ * private member fields
+ * member fields should start with m
+ * strings to be referred from strings.xml
  */
 public class AddPrivilegeFragment extends Fragment {
     EditText et_name;

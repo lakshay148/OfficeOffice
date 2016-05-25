@@ -23,6 +23,17 @@ import com.truedev.officeoffice.R;
 
 /**
  * A simple {@link Fragment} subclass.
+ *
+ *
+ *
+ * Review Comments :
+ * default Constructor
+ * private fields
+ * strings to be referred from strings.xml
+ * insert data with class objects
+ *
+ * owner and domain to be picked from db
+ *
  */
 public class AddModelFragment extends Fragment implements AdapterView.OnItemSelectedListener {
     DailyTaskDB dailyTaskDB;
@@ -97,7 +108,7 @@ public class AddModelFragment extends Fragment implements AdapterView.OnItemSele
     private void moveToNewActivity() {
         Intent i = new Intent(getActivity(), MainActivity.class);
         startActivity(i);
-        ((Activity) getActivity()).overridePendingTransition(0, 0);
+        (getActivity()).overridePendingTransition(0, 0);
 
     }
 }

@@ -21,14 +21,27 @@ import java.util.ArrayList;
 
 /**
  * Created by dipanshugarg on 18/5/16.
+ *
+ *
+ *
+ * Review Comments :
+ *
+ * Fragment instantiation with newInstance
+ * private member fields
+ * member fields should start with m
+ * strings to be referred from strings.xml
+ * add projects from db
+ * Add List through generalized Base Adapter
+ * put extras in constants
+ *
  */
 
-public class ProjectsFragments extends Fragment {
+public class ProjectsFragment extends Fragment {
 
     ListView listView;
     ArrayList<String> project;
 
-    public ProjectsFragments() {
+    public ProjectsFragment() {
 
     }
 
