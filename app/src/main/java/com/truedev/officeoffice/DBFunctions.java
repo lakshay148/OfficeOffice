@@ -1,6 +1,7 @@
 package com.truedev.officeoffice;
 
 import android.content.ContentValues;
+import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
@@ -8,8 +9,10 @@ import android.util.Log;
 
 import com.truedev.officeoffice.Database.DailyTaskDB;
 import com.truedev.officeoffice.Model.ProjectModel;
+import com.truedev.officeoffice.Model.UserData;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by dipanshugarg on 19/5/16.
@@ -196,4 +199,87 @@ public class DBFunctions {
             db.endTransaction();
         }
     }
+
+
+    public static void deleteRow(String name) {
+        SQLiteDatabase db = ApplicationController.getTasksDB(true);
+        try {
+            db.beginTransaction();
+            db.execSQL("delete from " + DailyTaskDB.TABLE_USERdETAIL + " where name ='" + name + "'");
+            db.setTransactionSuccessful();
+        } catch (SQLException e) {
+            Log.d(DailyTaskDB.TAG, "Error while trying to delete  users detail");
+        } finally {
+            db.endTransaction();
+        }
+
+
+    }
+
+    public static List<UserData> getAllUser() {
+
+        List<UserData> usersdetail = new ArrayList<>();
+
+        String USER_DETAIL_SELECT_QUERY = "SELECT * FROM " + DailyTaskDB.TABLE_USERdETAIL;
+
+        SQLiteDatabase db = ApplicationController.getTasksDB(false);
+        Cursor cursor = db.rawQuery(USER_DETAIL_SELECT_QUERY, null);
+
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    UserData userData = new UserData();
+                    userData.setName(cursor.getString(cursor.getColumnIndex(DailyTaskDB.NAME)));
+                    usersdetail.add(userData);
+
+                } while (cursor.moveToNext());
+            }
+        } catch (Exception e) {
+            Log.d(DailyTaskDB.TAG, "Error while trying to get posts from database");
+        } finally {
+            if (cursor != null && !cursor.isClosed()) {
+                cursor.close();
+            }
+        }
+
+        return usersdetail;
+
+    }
+
+
+    public static void insertUserDetail(UserData userData) {
+
+        SQLiteDatabase db = ApplicationController.getTasksDB(true);
+
+        db.beginTransaction();
+
+        try {
+            ContentValues values = new ContentValues();
+            values.put(DailyTaskDB.NAME, userData.name);
+
+            db.insertOrThrow(DailyTaskDB.TABLE_USERdETAIL, null, values);
+            db.setTransactionSuccessful();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            Log.d(DailyTaskDB.TAG, "Error while trying to add post to database");
+        } finally {
+
+            db.endTransaction();
+        }
+
+
+    }
+
+
+    public static synchronized DailyTaskDB getInstance(Context context) {
+
+        if (DailyTaskDB.mDbHelper == null) {
+            DailyTaskDB.mDbHelper = new DailyTaskDB(context.getApplicationContext());
+        }
+        return DailyTaskDB.mDbHelper;
+    }
+
+
+
+
 }

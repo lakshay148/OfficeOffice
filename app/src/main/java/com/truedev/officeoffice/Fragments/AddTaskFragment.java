@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,18 +16,14 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
 import com.truedev.officeoffice.Activity.MainActivity;
 import com.truedev.officeoffice.Adapter.AddTaskAdapter;
 import com.truedev.officeoffice.CommonUtils;
 import com.truedev.officeoffice.DBFunctions;
-import com.truedev.officeoffice.Database.DailyTaskDB;
 import com.truedev.officeoffice.Model.RowData;
 import com.truedev.officeoffice.R;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 
 
 public class AddTaskFragment extends Fragment {

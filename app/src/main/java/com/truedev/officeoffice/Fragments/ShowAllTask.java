@@ -8,13 +8,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.truedev.officeoffice.Adapter.ShowTaskAdapter;
-import com.truedev.officeoffice.CommonUtils;
 import com.truedev.officeoffice.DBFunctions;
-import com.truedev.officeoffice.Database.DailyTaskDB;
 import com.truedev.officeoffice.Model.ProjectModel;
 import com.truedev.officeoffice.R;
 
@@ -36,6 +33,7 @@ public class ShowAllTask extends Fragment {
     ListView listView;
     ShowTaskAdapter showTaskAdapter;
     TextView date,project,task;
+
     public ShowAllTask(Context context){
         this.context = context;
     }

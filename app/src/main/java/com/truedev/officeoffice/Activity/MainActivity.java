@@ -5,12 +5,12 @@ import android.app.FragmentManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.MenuItem;
@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
         initializeView();
         setUpDrawerLayout();
 
-        final String[] values = new String[]{"Projects", "Add Model", "EmployeeFragment", "Add Domain", "Add Privilege","Add Role","Logout"};
+        final String[] values = new String[]{"Projects", "Add Model", "EmployeeFragment", "Add Domain", "Add Privilege","Add Role","ShowAllTask" , "Logout"};
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_1, android.R.id.text1, values);
@@ -107,6 +107,7 @@ public class MainActivity extends AppCompatActivity {
 
             case 6:
                 Fragment fragment6= new ShowAllTask(getApplicationContext());
+                getSupportActionBar().setTitle("Show all Task");
                 FragmentManager fragmentManager6= getFragmentManager();
                 fragmentManager6.beginTransaction().replace(R.id.content_frame,fragment6).commit();
                 break;

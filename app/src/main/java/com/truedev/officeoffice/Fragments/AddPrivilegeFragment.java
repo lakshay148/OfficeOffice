@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.truedev.officeoffice.Activity.MainActivity;
+import com.truedev.officeoffice.DBFunctions;
 import com.truedev.officeoffice.Database.DailyTaskDB;
 import com.truedev.officeoffice.Model.UserData;
 import com.truedev.officeoffice.R;
@@ -42,9 +43,8 @@ public class AddPrivilegeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         View view = inflater.inflate(R.layout.fragment_add_privilege, container, false);
-        dbHelper = DailyTaskDB.getInstance(getActivity());
+        dbHelper = DBFunctions.getInstance(getActivity());
 
         et_name = (EditText) view.findViewById(R.id.et_name);
         btn_next = (Button) view.findViewById(R.id.btn_next);
@@ -61,7 +61,7 @@ public class AddPrivilegeFragment extends Fragment {
                     userData.name = "";
                 }
 
-                dbHelper.insertUserDetail(userData);
+                DBFunctions.insertUserDetail(userData);
                 Toast.makeText(getActivity(), "Privilege added", Toast.LENGTH_SHORT).show();
                 moveToNewActivity();
             }

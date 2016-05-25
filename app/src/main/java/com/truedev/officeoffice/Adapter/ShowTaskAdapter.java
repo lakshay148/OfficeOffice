@@ -1,6 +1,7 @@
 package com.truedev.officeoffice.Adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,10 +50,23 @@ public class ShowTaskAdapter extends BaseAdapter {
         View view = inflater.inflate(R.layout.show_all_task_layout, parent, false);
         TextView project = (TextView) view.findViewById(R.id.pro);
         TextView date = (TextView) view.findViewById(R.id.date);
+        TextView task_list_txt = (TextView)view.findViewById(R.id.task_list_txt);
         ListView task = (ListView) view.findViewById(R.id.task_list);
         ProjectModel projectModel = (ProjectModel) getItem(position);
-        project.setText(projectModel.getProject());
-        date.setText(projectModel.getDate());
+        project.setText("Project : "+ projectModel.getProject());
+        date.setText("Date  : " +projectModel.getDate());
+
+        String task_txt= "";
+        int i =0;
+        while (i<projectModel.getTask().size()){
+            int positionOfTask = i+1;
+            task_txt = task_txt+ positionOfTask +". " + projectModel.getTask().get(i)+"\n";
+            i++;
+        }
+
+        Log.e("Dipanshu", task_txt+"");
+        task_list_txt.setText(task_txt);
+
         addTaskListAdapter = new AddTaskListAdapter(context , projectModel.getTask());
         task.setAdapter(addTaskListAdapter);
         return view;

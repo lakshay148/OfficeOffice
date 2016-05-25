@@ -1,19 +1,8 @@
 package com.truedev.officeoffice.Database;
 
-import android.content.ContentValues;
 import android.content.Context;
-import android.database.Cursor;
-import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
-
-import com.truedev.officeoffice.Model.UserData;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 /**
  * Created by dipanshugarg on 17/5/16.
@@ -37,15 +26,15 @@ public class DailyTaskDB extends SQLiteOpenHelper {
     public static final String PROJECT = "project";
     public static final String PROJECT_TABLE = "ProjectTable";
     public static final String PROJECT_NAME_FIELD = "ProjectName";
-    private static final int DATABASE_VERSION = 2;
+    public static final int DATABASE_VERSION = 2;
     public static final String TAG = DailyTaskDB.class.getSimpleName();
-    private static final String TABLE_USERdETAIL = "userdetail";
-    private static final String TABLE_ADDROLE = "addRole";
-    private static final String _ID = "_id";
-    private static final String NAME = "name";
-    private static final String EMPNNAME = "empname";
-    private String _CHK_VALUES = "checkbox_value";
-    private static DailyTaskDB mDbHelper;
+    public static final String TABLE_USERdETAIL = "userdetail";
+    public static final String TABLE_ADDROLE = "addRole";
+    public static final String _ID = "_id";
+    public static final String NAME = "name";
+    public static final String EMPNNAME = "empname";
+    public String _CHK_VALUES = "checkbox_value";
+    public static DailyTaskDB mDbHelper;
 
 
 
@@ -105,142 +94,5 @@ public class DailyTaskDB extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_ADDROLE);
 
     }
-
-
-    public long insertTask(ArrayList<String> data) {
-        long success = 0;
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues values = new ContentValues();
-
-        for (int i = 0; i < data.size(); i++) {
-            values.put(Task, data.get(i));
-            success = db.insert(TABLE_TASK, null, values);
-        }
-        db.close();
-        return success;
-    }
-
-    public void insertEntryADDModel( String empID,String domain, String role) {
-        ContentValues newValues = new ContentValues();
-        SQLiteDatabase db = this.getWritableDatabase();
-        newValues.put("EmpID", empID);
-        newValues.put("Owner", domain);
-        newValues.put("ROLE", role);
-        db.insert(TABLE_ADD_MODEL, null, newValues);
-    }
-
-    public void insertEntry(String empName, String owner, String empID, String domain) {
-        ContentValues newValues = new ContentValues();
-        SQLiteDatabase db = this.getWritableDatabase();
-// Assign values for each row.
-        newValues.put("EMPNAME", empName);
-        newValues.put("EmpID", empID);
-        newValues.put("PASSWORD", owner);
-        newValues.put("ROLE", domain);
-        db.insert(TABLE_EMPLOYEE, null, newValues);
-        db.close();
-    }
-
-    public void insertEntryAddDomain(String addDomain) {
-        ContentValues newValues = new ContentValues();
-        SQLiteDatabase db = this.getWritableDatabase();
-        newValues.put("DOMAINNAME", addDomain);
-        db.insert(TABLE_ADDDOMAIN, null, newValues);
-        db.close();
-    }
-    public static synchronized DailyTaskDB getInstance(Context context) {
-
-        if (mDbHelper == null) {
-            mDbHelper = new DailyTaskDB(context.getApplicationContext());
-        }
-        return mDbHelper;
-    }
-
-    public void insertUserDetail(UserData userData) {
-
-        SQLiteDatabase db = getWritableDatabase();
-
-        db.beginTransaction();
-
-        try {
-            ContentValues values = new ContentValues();
-            values.put(NAME, userData.name);
-
-            db.insertOrThrow(TABLE_USERdETAIL, null, values);
-            db.setTransactionSuccessful();
-        } catch (SQLException e) {
-            e.printStackTrace();
-            Log.d(TAG, "Error while trying to add post to database");
-        } finally {
-
-            db.endTransaction();
-        }
-
-
-    }
-
-    public List<UserData> getAllUser() {
-
-        List<UserData> usersdetail = new ArrayList<>();
-
-        String USER_DETAIL_SELECT_QUERY = "SELECT * FROM " + TABLE_USERdETAIL;
-
-        SQLiteDatabase db = getReadableDatabase();
-        Cursor cursor = db.rawQuery(USER_DETAIL_SELECT_QUERY, null);
-
-        try {
-            if (cursor.moveToFirst()) {
-                do {
-                    UserData userData = new UserData();
-                    userData.setName(cursor.getString(cursor.getColumnIndex(NAME)));
-                    usersdetail.add(userData);
-
-                } while (cursor.moveToNext());
-            }
-        } catch (Exception e) {
-            Log.d(TAG, "Error while trying to get posts from database");
-        } finally {
-            if (cursor != null && !cursor.isClosed()) {
-                cursor.close();
-            }
-        }
-
-        return usersdetail;
-
-    }
-
-    /*
-   Delete single row from UserTable
-     */
-    public void deleteRow(String name) {
-        SQLiteDatabase db = getWritableDatabase();
-
-
-        try {
-            db.beginTransaction();
-            db.execSQL("delete from " + TABLE_USERdETAIL + " where name ='" + name + "'");
-            db.setTransactionSuccessful();
-        } catch (SQLException e) {
-            Log.d(TAG, "Error while trying to delete  users detail");
-        } finally {
-            db.endTransaction();
-        }
-
-
-    }
-
-    public void insertRole(String addPrefrences, ContentValues values) {
-        SQLiteDatabase db = getWritableDatabase();
-        ContentValues newValues2 = new ContentValues();
-        Set<Map.Entry<String, Object>> s = values.valueSet();
-        String new_val = "";
-        for (Map.Entry<String, Object> entry : s) {
-            new_val = values.getAsString(entry.getKey());
-            newValues2.put(entry.getKey(), new_val);
-            db.insert(addPrefrences, null, newValues2);
-
-        }
-    }
-
 
 }

@@ -1,24 +1,18 @@
 package com.truedev.officeoffice.Fragments;
 
-import android.app.Activity;
 import android.app.Fragment;
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.CheckBox;
-import android.widget.EditText;
-import android.widget.ListView;
 
-import com.truedev.officeoffice.Activity.MainActivity;
 import com.truedev.officeoffice.Adapter.ListAdapter;
+import com.truedev.officeoffice.DBFunctions;
 import com.truedev.officeoffice.Database.DailyTaskDB;
 import com.truedev.officeoffice.Interface.Listener;
 import com.truedev.officeoffice.Model.UserData;
@@ -58,10 +52,10 @@ public class AddRoleFragment extends Fragment implements Listener, View.OnClickL
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_add_role, container, false);
-        dailyTaskDB = DailyTaskDB.getInstance(getActivity());
+        dailyTaskDB = DBFunctions.getInstance(getActivity());
         checkBox = (CheckBox) view.findViewById(R.id.checkbox);
         recyclerView = (RecyclerView) view.findViewById(R.id.rv_contactlist);
-        adapter = new ListAdapter(this.getActivity(), dailyTaskDB.getAllUser());
+        adapter = new ListAdapter(this.getActivity(), DBFunctions.getAllUser());
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         return view;
@@ -77,8 +71,8 @@ public class AddRoleFragment extends Fragment implements Listener, View.OnClickL
 
     @Override
     public void nameToChnge(String name) {
-        dailyTaskDB.deleteRow(name);
-        adapter = new ListAdapter(getActivity(), dailyTaskDB.getAllUser());
+        DBFunctions.deleteRow(name);
+        adapter = new ListAdapter(getActivity(), DBFunctions.getAllUser());
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
     }
