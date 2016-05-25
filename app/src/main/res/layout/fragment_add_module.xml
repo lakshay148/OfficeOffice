@@ -26,7 +26,6 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="2.5"
                 android:text="@string/emp_id_model"
-                android:textSize="18dp"
                 android:textStyle="bold" />
 
             <TextView
@@ -55,7 +54,6 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="2.5"
                 android:text="@string/emp_role"
-                android:textSize="18dp"
                 android:textStyle="bold" />
 
             <TextView
@@ -85,7 +83,6 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="2.5"
                 android:text="@string/domain_name"
-                android:textSize="18dp"
                 android:textStyle="bold" />
 
             <TextView
@@ -93,7 +90,6 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
                 android:text="@string/saprater"
-                android:textSize="20dp"
                 android:textStyle="bold" />
 
             <Spinner

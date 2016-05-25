@@ -29,15 +29,16 @@ import java.util.ArrayList;
  */
 public class ShowAllTask extends Fragment {
 
-    Context context;
     ListView listView;
     ShowTaskAdapter showTaskAdapter;
     TextView date,project,task;
+    Context mContext;
 
-    public ShowAllTask(Context context){
-        this.context = context;
+    public static ShowAllTask newInstance(Context applicationContext) {
+        ShowAllTask fragment = new ShowAllTask();
+        fragment.mContext = applicationContext;
+        return fragment;
     }
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -48,7 +49,7 @@ public class ShowAllTask extends Fragment {
 
         DBFunctions dbFunctions = new DBFunctions();
         ArrayList<ProjectModel> projectModel = dbFunctions.getAllTask();
-        showTaskAdapter = new ShowTaskAdapter(context, projectModel );
+        showTaskAdapter = new ShowTaskAdapter(mContext, projectModel );
         listView.setAdapter(showTaskAdapter);
        /* date = (TextView)view.findViewById(R.id.date);
         project = (TextView)view.findViewById(R.id.project);

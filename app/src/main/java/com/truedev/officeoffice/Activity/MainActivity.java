@@ -68,45 +68,45 @@ public class MainActivity extends AppCompatActivity {
     private void selectItem(int position) {
         switch (position) {
             case 0:
-                Fragment fragment = new ProjectsFragment();
+                Fragment fragment = ProjectsFragment.newInstance(this);
                 getSupportActionBar().setTitle("Projects");
                 FragmentManager fragmentManager = getFragmentManager();
                 fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
                 break;
 
             case 1:
-                Fragment fragment1 = new AddModelFragment(getApplicationContext());
+                Fragment fragment1 = AddModelFragment.newInstance(this);
                 getSupportActionBar().setTitle("Add Model");
                 FragmentManager fragmentManager1 = getFragmentManager();
                 fragmentManager1.beginTransaction().replace(R.id.content_frame, fragment1).commit();
                 break;
             case 2:
-                Fragment fragment2 = new EmployeeFragment(getApplicationContext());
+                Fragment fragment2 =EmployeeFragment.newInstance(this);
                 getSupportActionBar().setTitle("EmployeeFragment");
                 FragmentManager fragmentManager2 = getFragmentManager();
                 fragmentManager2.beginTransaction().replace(R.id.content_frame, fragment2).commit();
                 break;
             case 3:
-                Fragment fragment3 = new AddDomainFragment(getApplicationContext());
+                Fragment fragment3 = AddDomainFragment.newInstance(this);
                 getSupportActionBar().setTitle("AddDomainFragment");
                 FragmentManager fragmentManager3 = getFragmentManager();
                 fragmentManager3.beginTransaction().replace(R.id.content_frame, fragment3).commit();
                 break;
             case 4:
-                Fragment fragment4 = new AddPrivilegeFragment(getApplicationContext());
+                Fragment fragment4 = AddPrivilegeFragment.newInstance(this);
                 getSupportActionBar().setTitle("AddPrivilegeFragment");
                 FragmentManager fragmentManager4 = getFragmentManager();
                 fragmentManager4.beginTransaction().replace(R.id.content_frame, fragment4).commit();
                 break;
             case 5:
-                Fragment fragment5 = new AddRoleFragment(getApplicationContext());
+                Fragment fragment5 = AddRoleFragment.newInstance(this);
                 getSupportActionBar().setTitle("AddRoleFragment");
                 FragmentManager fragmentManager5 = getFragmentManager();
                 fragmentManager5.beginTransaction().replace(R.id.content_frame, fragment5).commit();
                 break;
 
             case 6:
-                Fragment fragment6= new ShowAllTask(getApplicationContext());
+                Fragment fragment6=ShowAllTask.newInstance(this);
                 getSupportActionBar().setTitle("Show all Task");
                 FragmentManager fragmentManager6= getFragmentManager();
                 fragmentManager6.beginTransaction().replace(R.id.content_frame,fragment6).commit();

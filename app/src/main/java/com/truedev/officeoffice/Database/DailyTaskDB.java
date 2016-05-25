@@ -1,8 +1,19 @@
 package com.truedev.officeoffice.Database;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
+
+import com.truedev.officeoffice.Model.UserData;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by dipanshugarg on 17/5/16.
@@ -26,15 +37,15 @@ public class DailyTaskDB extends SQLiteOpenHelper {
     public static final String PROJECT = "project";
     public static final String PROJECT_TABLE = "ProjectTable";
     public static final String PROJECT_NAME_FIELD = "ProjectName";
-    public static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 2;
     public static final String TAG = DailyTaskDB.class.getSimpleName();
-    public static final String TABLE_USERdETAIL = "userdetail";
-    public static final String TABLE_ADDROLE = "addRole";
-    public static final String _ID = "_id";
-    public static final String NAME = "name";
-    public static final String EMPNNAME = "empname";
-    public String _CHK_VALUES = "checkbox_value";
-    public static DailyTaskDB mDbHelper;
+    private static final String TABLE_USERdETAIL = "userdetail";
+    private static final String TABLE_ADDROLE = "addRole";
+    private static final String _ID = "_id";
+    private static final String NAME = "name";
+    private static final String EMPNNAME = "empname";
+    private String _CHK_VALUES = "checkbox_value";
+    private static DailyTaskDB mDbHelper;
 
 
 

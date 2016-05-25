@@ -1,7 +1,6 @@
 package com.truedev.officeoffice.Fragments;
 
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -42,17 +41,20 @@ public class AddModelFragment extends Fragment implements AdapterView.OnItemSele
     Spinner spinerOwner, spinerDomain;
     EditText empName, empID;
     Button bSubmit;
-    Context context;
+    Context mContext;
 
-    public AddModelFragment(Context applicationContext) {
-        this.context = applicationContext;
+    public static AddModelFragment newInstance(Context applicationContext) {
+        AddModelFragment fragment = new AddModelFragment();
+        fragment.mContext = applicationContext;
+        return fragment;
+
     }
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_add_model, container, false);
+        View view = inflater.inflate(R.layout.fragment_add_module, container, false);
         spinerOwner = (Spinner) view.findViewById(R.id.spinner_owner);
         spinerDomain = (Spinner) view.findViewById(R.id.spinner_domain);
         empID = (EditText) view.findViewById(R.id.et_empID);

@@ -21,24 +21,25 @@ import com.truedev.officeoffice.R;
 
 /**
  * A simple {@link Fragment} subclass.
- * @author ?
  *
- * Fragment instantiation with newInstance
- * private member fields
- * member fields should start with m
- * strings to be referred from strings.xml
+ * @author ?
+ *         <p>
+ *         Fragment instantiation with newInstance
+ *         private member fields
+ *         member fields should start with m
+ *         strings to be referred from strings.xml
  */
 public class AddPrivilegeFragment extends Fragment {
     EditText et_name;
     Button btn_next;
     DailyTaskDB dbHelper;
-    Context context;
+    Context mContext;
 
-
-    public AddPrivilegeFragment(Context applicationContext) {
-        this.context = applicationContext;
+    public static AddPrivilegeFragment newInstance(Context applicationContext) {
+        AddPrivilegeFragment fragment = new AddPrivilegeFragment();
+        fragment.mContext = applicationContext;
+        return fragment;
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

@@ -32,44 +32,48 @@ import com.truedev.officeoffice.R;
  *
  */
 public class EmployeeFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemSelectedListener {
-    private String[] role = {"R1", "R2", "R3", "R4"};
-    Spinner spinerRole;
-    EditText emp_name, emp_id, emp_password;
-    Button button;
-    DailyTaskDB dailyTaskDB;
+    private String[] mRole = {"R1", "R2", "R3", "R4"};
+    private Spinner mSpinerRole;
+    private EditText mEmp_name, mEmp_id, mEmp_password;
+    private Button mbutton;
+    private DailyTaskDB mDailyTaskDB;
     Context context;
 
-    public EmployeeFragment(Context applicationContext) {
-        this.context= applicationContext;    }
+    Context mContext;
 
+    public static EmployeeFragment newInstance(Context applicationContext) {
+        EmployeeFragment fragment = new EmployeeFragment();
+        fragment.mContext = applicationContext;
+        return fragment;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_employee, container, false);
 
-        emp_id = (EditText) view.findViewById(R.id.et_empID);
-        emp_name = (EditText) view.findViewById(R.id.et_empName);
-        emp_password = (EditText) view.findViewById(R.id.et_empPassword);
-        spinerRole = (Spinner) view.findViewById(R.id.spinner);
-        button = (Button) view.findViewById(R.id.submit);
-        button.setOnClickListener(this);
+        mEmp_id = (EditText) view.findViewById(R.id.et_empID);
+        mEmp_name = (EditText) view.findViewById(R.id.et_empName);
+        mEmp_password = (EditText) view.findViewById(R.id.et_empPassword);
+        mSpinerRole = (Spinner) view.findViewById(R.id.spinner);
+        mbutton = (Button) view.findViewById(R.id.submit);
+        mbutton.setOnClickListener(this);
 
         ArrayAdapter<String> adapter_state = new ArrayAdapter<String>(this.getActivity(),
-                android.R.layout.simple_spinner_item, role);
+                android.R.layout.simple_spinner_item, mRole);
         adapter_state
                 .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinerRole.setAdapter(adapter_state);
-        spinerRole.setOnItemSelectedListener(this);
+        mSpinerRole.setAdapter(adapter_state);
+        mSpinerRole.setOnItemSelectedListener(this);
         return view;
     }
 
     @Override
     public void onClick(View v) {
-        String empName = emp_name.getText().toString();
-        String password = emp_password.getText().toString();
-        String empID = emp_id.getText().toString();
-        String item = spinerRole.getSelectedItem().toString();
+        String empName = mEmp_name.getText().toString();
+        String password = mEmp_password.getText().toString();
+        String empID = mEmp_id.getText().toString();
+        String item = mSpinerRole.getSelectedItem().toString();
 
         if (empName.equals("") || password.equals("") || empID.equals("")) {
             Toast.makeText(getActivity(), "Field Vaccant", Toast.LENGTH_LONG).show();

@@ -27,16 +27,16 @@ import com.truedev.officeoffice.R;
  * strings to be referred from strings.xml
  */
 public class AddDomainFragment extends Fragment {
-    Context context;
+    Context mContext;
     EditText editTextdomainname;
     Button button;
 
-    public AddDomainFragment(Context applicationContext) {
-        this.context = applicationContext;
-        // Required empty public constructor
+    public static AddDomainFragment newInstance(Context applicationContext) {
+        AddDomainFragment fragment = new AddDomainFragment();
+        fragment.mContext = applicationContext;
+        return fragment;
+
     }
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

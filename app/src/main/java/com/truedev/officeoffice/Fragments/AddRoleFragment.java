@@ -32,7 +32,7 @@ import java.util.ArrayList;
 
 
 public class AddRoleFragment extends Fragment implements Listener, View.OnClickListener {
-    Context context;
+   // Context context;
     RecyclerView recyclerView;
     ListAdapter adapter;
     CheckBox checkBox;
@@ -40,10 +40,12 @@ public class AddRoleFragment extends Fragment implements Listener, View.OnClickL
     ArrayList<UserData> arrayList = new ArrayList<UserData>();
     DailyTaskDB dailyTaskDB;
 
+    Context mContext;
 
-    public AddRoleFragment(Context applicationContext) {
-        this.context = applicationContext;
-
+    public static AddRoleFragment newInstance(Context applicationContext) {
+        AddRoleFragment fragment = new AddRoleFragment();
+        fragment.mContext = applicationContext;
+        return fragment;
     }
 
 

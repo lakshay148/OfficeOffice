@@ -28,7 +28,6 @@ import java.util.ArrayList;
 
 public class AddTaskFragment extends Fragment {
 
-    Context context;
     EditText editText,date;
     ImageView addTask;
     ListView listView;
@@ -38,8 +37,12 @@ public class AddTaskFragment extends Fragment {
     private ArrayList<RowData> items = new ArrayList<RowData>();
     private ArrayList<String> task = new ArrayList<String>();
     AddTaskAdapter dynamicAdapter;
-    public AddTaskFragment(Context context) {
-        this.context  = context;
+    Context mContext;
+
+    public static AddTaskFragment newInstance(Context applicationContext) {
+        AddTaskFragment fragment = new AddTaskFragment();
+        fragment.mContext = applicationContext;
+        return fragment;
     }
 
     @Nullable
@@ -61,12 +64,12 @@ public class AddTaskFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if(editText.getText().toString().equals("")) {
-                    Toast.makeText(context,"Empty Value", Toast.LENGTH_LONG).show();
+                    Toast.makeText(mContext,"Empty Value", Toast.LENGTH_LONG).show();
                 }
                 else {
                     String task = editText.getText().toString();
                     items.add(new RowData(task));
-                    dynamicAdapter = new AddTaskAdapter(context, items);
+                    dynamicAdapter = new AddTaskAdapter(mContext, items);
                     listView.setAdapter(dynamicAdapter);
                     editText.setText("");
                 }

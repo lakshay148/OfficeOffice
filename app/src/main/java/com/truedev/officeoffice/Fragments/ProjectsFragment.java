@@ -41,8 +41,12 @@ public class ProjectsFragment extends Fragment {
     ListView listView;
     ArrayList<String> project;
 
-    public ProjectsFragment() {
+    Context mContext;
 
+    public static ProjectsFragment newInstance(Context applicationContext) {
+        ProjectsFragment fragment = new ProjectsFragment();
+        fragment.mContext = applicationContext;
+        return fragment;
     }
 
     @Nullable
@@ -70,7 +74,8 @@ public class ProjectsFragment extends Fragment {
                 int itemPosition = position;
                 String  itemValue = (String) listView.getItemAtPosition(position);
                 if(itemPosition <= project.size()) {
-                    Fragment fragment = new AddTaskFragment(getActivity());
+                    Fragment fragment = new AddTaskFragment();
+                    ProjectsFragment.newInstance(getContext());
                     Bundle bundle=new Bundle();
                     bundle.putString("Project", ""+((TextView)view.findViewById(R.id.project)).getText().toString());
                     fragment.setArguments(bundle);
