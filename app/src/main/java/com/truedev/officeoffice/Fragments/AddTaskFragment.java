@@ -26,18 +26,28 @@ import com.truedev.officeoffice.R;
 import java.util.ArrayList;
 
 
+/**
+ * A simple {@link Fragment} subclass.
+ * @author Dipanshu Garg
+ * Fragment instantiation with newInstance Done
+ * private member fields Done
+ * member fields should start with m Done
+ * strings to be referred from strings.xml Done
+ */
+
+
 public class AddTaskFragment extends Fragment {
 
-    EditText editText,date;
-    ImageView addTask;
-    ListView listView;
-    Button save;
-    String project;
-    TextView dataTask;
-    private ArrayList<RowData> items = new ArrayList<RowData>();
-    private ArrayList<String> task = new ArrayList<String>();
-    AddTaskAdapter dynamicAdapter;
-    Context mContext;
+    private EditText mGetTask,mDate;
+    private ImageView mAddTask;
+    private ListView mListShowData;
+    private Button mSave;
+    private String mProject;
+    private TextView mdataTask;
+    private ArrayList<RowData> mTaskRowData = new ArrayList<RowData>();
+    private ArrayList<String> mTask = new ArrayList<String>();
+    private AddTaskAdapter mDynamicAdapter;
+    private Context mContext;
 
     public static AddTaskFragment newInstance(Context applicationContext) {
         AddTaskFragment fragment = new AddTaskFragment();
@@ -51,44 +61,43 @@ public class AddTaskFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.add_layout,container,false);
 
-        project=getArguments().getString("Project");
+        mProject=getArguments().getString("Project");
+        mGetTask = (EditText)view.findViewById(R.id.get_task);
+        mAddTask = (ImageView)view.findViewById(R.id.add_task);
+        mListShowData = (ListView)view.findViewById(R.id.add_layout);
+        mDate = (EditText) view.findViewById(R.id.date);
+        mSave = (Button) view.findViewById(R.id.save);
+        mDate.setText(CommonUtils.getCurrentDate());
 
-        editText = (EditText)view.findViewById(R.id.get_task);
-        addTask = (ImageView)view.findViewById(R.id.add_task);
-        listView = (ListView)view.findViewById(R.id.add_layout);
-        date = (EditText) view.findViewById(R.id.date);
-        save = (Button) view.findViewById(R.id.save);
-        date.setText(CommonUtils.getCurrentDate());
-
-        addTask.setOnClickListener(new View.OnClickListener() {
+        mAddTask.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(editText.getText().toString().equals("")) {
+                if(mGetTask.getText().toString().equals("")) {
                     Toast.makeText(mContext,"Empty Value", Toast.LENGTH_LONG).show();
                 }
                 else {
-                    String task = editText.getText().toString();
-                    items.add(new RowData(task));
-                    dynamicAdapter = new AddTaskAdapter(mContext, items);
-                    listView.setAdapter(dynamicAdapter);
-                    editText.setText("");
+                    String task = mGetTask.getText().toString();
+                    mTaskRowData.add(new RowData(task));
+                    mDynamicAdapter = new AddTaskAdapter(mContext, mTaskRowData);
+                    mListShowData.setAdapter(mDynamicAdapter);
+                    mGetTask.setText("");
                 }
             }
         });
 
-        save.setOnClickListener(new View.OnClickListener() {
+        mSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                task.clear();
-                int count = listView.getCount();
+                mTask.clear();
+                int count = mListShowData.getCount();
                 for (int i = 0; i<count ; i++ ) {
-                    View view2 = listView.getChildAt(i);
-                    dataTask= (TextView) view2.findViewById(R.id.data);
-                    task.add(dataTask.getText().toString());
+                    View view2 = mListShowData.getChildAt(i);
+                    mdataTask= (TextView) view2.findViewById(R.id.data);
+                    mTask.add(mdataTask.getText().toString());
                 }
                 DBFunctions dailyTaskDB = new DBFunctions();
 
-                long getSuccess= dailyTaskDB.insertTask(task,CommonUtils.getCurrentDate(),project);
+                long getSuccess= dailyTaskDB.insertTask(mTask,CommonUtils.getCurrentDate(),mProject);
                 if(getSuccess>=1) {
                     Toast.makeText(getActivity(),"Data Added Successfully",Toast.LENGTH_LONG).show();
                     moveToNewActivity();

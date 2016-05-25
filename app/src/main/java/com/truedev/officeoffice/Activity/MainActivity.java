@@ -33,10 +33,10 @@ import com.truedev.officeoffice.R;
 
 public class MainActivity extends AppCompatActivity {
 
-    ListView listView;
+    private ListView mListView;
     private Toolbar mToolbar;
     private FrameLayout mFrameLayout;
-    private DrawerLayout drawerLayout;
+    private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
 
     @Override
@@ -52,13 +52,13 @@ public class MainActivity extends AppCompatActivity {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_1, android.R.id.text1, values);
 
-        listView.setAdapter(adapter);
+        mListView.setAdapter(adapter);
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 selectItem(position);
-                drawerLayout.closeDrawers();
+                mDrawerLayout.closeDrawers();
             }
 
         });
@@ -130,7 +130,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                drawerLayout.openDrawer(GravityCompat.START);  // OPEN DRAWER
+                mDrawerLayout.openDrawer(GravityCompat.START);  // OPEN DRAWER
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -153,7 +153,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        mDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, 0, 0) {
+        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, 0, 0) {
 
             public void onDrawerClosed(View drawerView) {
                 super.onDrawerClosed(drawerView);
@@ -165,15 +165,15 @@ public class MainActivity extends AppCompatActivity {
         };
 
         mDrawerToggle.setDrawerIndicatorEnabled(true);
-        drawerLayout.setDrawerListener(mDrawerToggle);
+        mDrawerLayout.setDrawerListener(mDrawerToggle);
         mDrawerToggle.syncState();
 
     }
 
     private void initializeView() {
-        listView = (ListView) findViewById(R.id.list);
+        mListView = (ListView) findViewById(R.id.list);
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
-        drawerLayout = (DrawerLayout) findViewById(R.id.drawer);
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer);
         mFrameLayout = (FrameLayout) findViewById(R.id.content_frame);
     }
 
@@ -189,8 +189,8 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if (drawerLayout.isDrawerOpen(Gravity.LEFT)) {
-            drawerLayout.closeDrawers();
+        if (mDrawerLayout.isDrawerOpen(Gravity.LEFT)) {
+            mDrawerLayout.closeDrawers();
         } else {
             if (getSupportFragmentManager().getBackStackEntryCount()> 0) {
                 getSupportFragmentManager().popBackStack();

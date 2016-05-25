@@ -20,10 +20,10 @@ import java.util.List;
 
 public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder> {
 
-    Context context;
-    List<UserData> dataList = new ArrayList<>();
-    LayoutInflater inflater;
-    Listener listener;
+    private Context context;
+    private List<UserData> dataList = new ArrayList<>();
+    private LayoutInflater inflater;
+    private Listener listener;
 
     public ListAdapter(Context context, List<UserData> dataList1) {
 

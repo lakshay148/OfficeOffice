@@ -2,10 +2,10 @@ package com.truedev.officeoffice.Fragments;
 
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +18,6 @@ import android.widget.Toast;
 
 import com.truedev.officeoffice.Activity.MainActivity;
 import com.truedev.officeoffice.DBFunctions;
-import com.truedev.officeoffice.Database.DailyTaskDB;
 import com.truedev.officeoffice.R;
 
 /**
@@ -36,8 +35,6 @@ public class EmployeeFragment extends Fragment implements View.OnClickListener, 
     private Spinner mSpinerRole;
     private EditText mEmp_name, mEmp_id, mEmp_password;
     private Button mbutton;
-    private DailyTaskDB mDailyTaskDB;
-    Context context;
 
     Context mContext;
 

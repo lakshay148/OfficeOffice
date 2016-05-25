@@ -15,13 +15,12 @@ import android.widget.Toast;
 
 import com.truedev.officeoffice.Activity.MainActivity;
 import com.truedev.officeoffice.DBFunctions;
-import com.truedev.officeoffice.Database.DailyTaskDB;
 import com.truedev.officeoffice.R;
 
 /**
  * A simple {@link Fragment} subclass.
  * @author ?
- * Fragment instantiation with newInstance
+ * Fragment instantiation with newInstance Done
  * private member fields
  * member fields should start with m
  * strings to be referred from strings.xml

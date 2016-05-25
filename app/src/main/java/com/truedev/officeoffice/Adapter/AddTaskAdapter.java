@@ -8,7 +8,6 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-
 import com.truedev.officeoffice.Model.RowData;
 import com.truedev.officeoffice.R;
 
@@ -19,42 +18,46 @@ import java.util.ArrayList;
  */
 public class AddTaskAdapter extends BaseAdapter {
 
-    Context context;
-    ArrayList<RowData> rowDatas;
+    private Context mContext;
+    private ArrayList<RowData> mRowDatas;
+    private TextView  mTaskData;
+    private ImageView mRemoveData;
+    private RowData mRowData;
+
     public AddTaskAdapter(Context context , ArrayList<RowData> list) {
-        this.context = context;
-        this.rowDatas = list;
+        this.mContext = context;
+        this.mRowDatas = list;
     }
 
     @Override
     public int getCount() {
-        return rowDatas.size();
+        return mRowDatas.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return rowDatas.get(position);
+        return mRowDatas.get(position);
     }
 
     @Override
     public long getItemId(int position) {
-        return rowDatas.indexOf(getItem(position));
+        return mRowDatas.indexOf(getItem(position));
     }
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
-        LayoutInflater inflater = (LayoutInflater) context
+        LayoutInflater inflater = (LayoutInflater) mContext
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View rowView = inflater.inflate(R.layout.dynamic_list, parent, false);
-        TextView  taskData = (TextView)rowView.findViewById(R.id.data);
-        final ImageView button = (ImageView)rowView.findViewById(R.id.remove);
-        RowData rowData = (RowData) getItem(position);
-        taskData.setText(rowData.getData());
+        mTaskData = (TextView)rowView.findViewById(R.id.data);
+        mRemoveData = (ImageView)rowView.findViewById(R.id.remove);
+        mRowData = (RowData) getItem(position);
+        mTaskData.setText(mRowData.getData());
 
-        button.setOnClickListener(new View.OnClickListener() {
+        mRemoveData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                rowDatas.remove(position);
+                mRowDatas.remove(position);
                 notifyDataSetChanged();
             }
         });

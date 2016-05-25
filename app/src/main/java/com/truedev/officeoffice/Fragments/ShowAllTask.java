@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.truedev.officeoffice.Adapter.ShowTaskAdapter;
 import com.truedev.officeoffice.DBFunctions;
@@ -25,38 +24,31 @@ import java.util.ArrayList;
  * member fields should start with m
  * strings to be referred from strings.xml
  *
- * show all task not working
  */
 public class ShowAllTask extends Fragment {
 
-    ListView listView;
-    ShowTaskAdapter showTaskAdapter;
-    TextView date,project,task;
-    Context mContext;
+    private ListView mDataShowListView;
+    private ShowTaskAdapter mShowTaskAdapter;
+    private Context mContext;
 
     public static ShowAllTask newInstance(Context applicationContext) {
         ShowAllTask fragment = new ShowAllTask();
         fragment.mContext = applicationContext;
         return fragment;
     }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.show_all_task_list,container,false);
 
-        listView = (ListView)view.findViewById(R.id.data_show);
+        mDataShowListView = (ListView)view.findViewById(R.id.data_show);
 
         DBFunctions dbFunctions = new DBFunctions();
         ArrayList<ProjectModel> projectModel = dbFunctions.getAllTask();
-        showTaskAdapter = new ShowTaskAdapter(mContext, projectModel );
-        listView.setAdapter(showTaskAdapter);
-       /* date = (TextView)view.findViewById(R.id.date);
-        project = (TextView)view.findViewById(R.id.project);
-        task = (TextView)view.findViewById(R.id.project);
-
-        DBFunctions dailyTaskDB = new DBFunctions();
-        dailyTaskDB.getAllRecords();*/
+        mShowTaskAdapter = new ShowTaskAdapter(mContext, projectModel );
+        mDataShowListView.setAdapter(mShowTaskAdapter);
         return view;
     }
 }

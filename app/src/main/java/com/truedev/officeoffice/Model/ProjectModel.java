@@ -6,6 +6,7 @@ import java.util.ArrayList;
  * Created by dipanshugarg on 23/5/16.
  */
 public class ProjectModel {
+
     String project;
     String date;
     ArrayList<String> task;
