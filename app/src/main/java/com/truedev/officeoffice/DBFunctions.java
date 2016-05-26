@@ -195,7 +195,7 @@ public class DBFunctions {
         }catch (SQLException e) {
             e.printStackTrace();
         }
-
+        
     }
 
 
@@ -294,6 +294,48 @@ public class DBFunctions {
     }
 
 
+    public static void insertEmpDetail(UserData userData) {
+        SQLiteDatabase db = ApplicationController.getTasksDB(true);
+        db.beginTransaction();
+        try {
+            ContentValues values = new ContentValues();
+            values.put(DailyTaskDB.EMPNAME, userData.emp_name);
+            values.put(DailyTaskDB.EMPID, userData.emp_id);
+            values.put(DailyTaskDB.EMPPASSWORD, userData.emp_password);
+            values.put(DailyTaskDB.EMPROLE, userData.emp_role);
+            db.insertOrThrow(DailyTaskDB.TABLE_EMPdETAIL, null, values);
+            db.setTransactionSuccessful();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            Log.d(DailyTaskDB.TAG, "Error while trying to add post to database");
+        } finally {
+            db.endTransaction();
+        }
+    }
+    public static void insertModuleDetail(UserData userData) {
 
+        SQLiteDatabase db = ApplicationController.getTasksDB(true);
+
+        db.beginTransaction();
+
+        try {
+            ContentValues values = new ContentValues();
+
+            values.put(DailyTaskDB.EMPID, userData.emp_id);
+            values.put(DailyTaskDB.ADDMODULEDOMAIN, userData.module_domain);
+            values.put(DailyTaskDB.ADDMODULEROLE, userData.module_role);
+
+            db.insertOrThrow(DailyTaskDB.TABLE_EMPdETAIL, null, values);
+            db.setTransactionSuccessful();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            Log.d(DailyTaskDB.TAG, "Error while trying to add post to database");
+        } finally {
+
+            db.endTransaction();
+        }
+
+
+    }
 
 }
