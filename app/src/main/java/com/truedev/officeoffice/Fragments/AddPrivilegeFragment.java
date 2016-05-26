@@ -21,13 +21,7 @@ import com.truedev.officeoffice.R;
 
 /** Created by Ankita sharma
  *
- * A simple {@link Fragment} subclass.
- * @author ?                               /done
- *
- * Fragment instantiation with newInstance  /done
- * private member fields                    /done
- * member fields should start with m        /done
- * strings to be referred from strings.xml  /done
+ * /
  */
 public class AddPrivilegeFragment extends Fragment {
    private EditText mEt_name;

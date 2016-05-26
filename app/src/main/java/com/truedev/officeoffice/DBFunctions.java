@@ -120,71 +120,31 @@ public class DBFunctions {
     }
 
 
-    public void insertInProjectTable(ArrayList<String> strings){
+    public void insertInProjectTable(ArrayList<String> strings) {
 
         SQLiteDatabase db = ApplicationController.getTasksDB(true);
 
-        try{
+        try {
             db.beginTransaction();
 
-            for (int i=0; i<strings.size(); i++){
+            for (int i = 0; i < strings.size(); i++) {
                 ContentValues values = new ContentValues();
-                values.put(DailyTaskDB.PROJECT_NAME_FIELD,strings.get(i));
+                values.put(DailyTaskDB.PROJECT_NAME_FIELD, strings.get(i));
                 Log.d("Dipanshu", strings.get(i));
-                float d= db.insert(DailyTaskDB.PROJECT_TABLE, null,values);
-                Log.d("Insert Successfull ", d+"");
+                float d = db.insert(DailyTaskDB.PROJECT_TABLE, null, values);
+                Log.d("Insert Successfull ", d + "");
 
             }
             db.setTransactionSuccessful();
 
-        }catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
-        }
-        finally {
+        } finally {
             db.endTransaction();
         }
     }
 
 
-
-    public void insertEntryADDModel( String empID,String domain, String role) {
-        SQLiteDatabase db = ApplicationController.getTasksDB(true);
-
-        try {
-            db.beginTransaction();
-
-        }catch (SQLException e){
-            e.printStackTrace();
-            ContentValues newValues = new ContentValues();
-            newValues.put("EmpID", empID);
-            newValues.put("Owner", domain);
-            newValues.put("ROLE", role);
-            db.insert(DailyTaskDB.TABLE_ADD_MODEL, null, newValues);
-        }
-        finally {
-            db.endTransaction();
-        }
-    }
-
-
-    public void insertEntry(String empName, String owner, String empID, String domain) {
-        SQLiteDatabase db = ApplicationController.getTasksDB(true);
-        try {
-            ContentValues newValues = new ContentValues();
-            newValues.put("EMPNAME", empName);
-            newValues.put("EmpID", empID);
-            newValues.put("PASSWORD", owner);
-            newValues.put("ROLE", domain);
-            db.insert(DailyTaskDB.TABLE_EMPLOYEE, null, newValues);
-
-        }catch (SQLException e){
-            e.printStackTrace();
-        }
-        finally {
-            db.endTransaction();
-        }
-
-    }
 
     public void insertEntryAddDomain(String addDomain) {
         SQLiteDatabase db = ApplicationController.getTasksDB(true);

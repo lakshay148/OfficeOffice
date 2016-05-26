@@ -4,6 +4,18 @@ import java.io.Serializable;
 
 
 public class UserData implements Serializable {
+    public String name ="";
+    public String roleName="";
+    public boolean chekBoolen=false;
+    public String emp_name = "null";
+    public String emp_id = "null";
+    public String emp_password = "null";
+    public String emp_role = "null";
+    public String module_role = "role";
+    public String module_domain = "domain";
+    public String module_empID = "empId";
+
+
     public String getEmp_id() {
         return emp_id;
     }
@@ -78,14 +90,5 @@ public class UserData implements Serializable {
     public String getRoleName() { return roleName;}
 
     public void setRoleName(String roleName) { this.roleName = roleName;}
-    public String name ="";
-    public String roleName="";
-    public boolean chekBoolen=false;
-    public String emp_name = "null";
-    public String emp_id = "null";
-    public String emp_password = "null";
-    public String emp_role = "null";
-    public String module_role = "role";
-    public String module_domain = "domain";
-    public String module_empID = "empId";
+
 }

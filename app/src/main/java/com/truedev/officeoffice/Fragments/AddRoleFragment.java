@@ -31,13 +31,6 @@ import java.util.ArrayList;
 /** created by Ankita Sharma
  *
  /*
- * @author ?                                   /done
- * Fragment instantiation with newInstance   /done
- * private member fields                     /done
- * member fields should start with m         /done
- * strings to be referred from strings.xml   /done
- *
- * Role not being inserted in db
  */
 
 
