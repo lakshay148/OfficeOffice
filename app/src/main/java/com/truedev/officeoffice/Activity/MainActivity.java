@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         initializeView();
         setUpDrawerLayout();
 
-        final String[] values = new String[]{"Projects", "Add Model", "EmployeeFragment", "Add Domain", "Add Privilege","Add Role","ShowAllTask" , "Logout"};
+        final String[] values = new String[]{"Projects", "Add Module", "Employee Fragment", "Add Domain", "Add Privilege","Add Role","Show All Task" , "Logout"};
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_1, android.R.id.text1, values);
@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
 
            case 1:
-                getSupportActionBar().setTitle("Add Model");
+                getSupportActionBar().setTitle("Add Module");
                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, AddModelFragment.newInstance(this)).commit();
                 break;
             case 2:
