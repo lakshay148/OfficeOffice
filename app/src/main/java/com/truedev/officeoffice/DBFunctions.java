@@ -190,14 +190,12 @@ public class DBFunctions {
         SQLiteDatabase db = ApplicationController.getTasksDB(true);
         try {
             ContentValues newValues = new ContentValues();
-            newValues.put("DOMAINNAME", addDomain);
+            newValues.put(DailyTaskDB.Domain, addDomain);
             db.insert(DailyTaskDB.TABLE_ADDDOMAIN, null, newValues);
         }catch (SQLException e) {
             e.printStackTrace();
         }
-        finally {
-            db.endTransaction();
-        }
+
     }
 
 
@@ -256,14 +254,12 @@ public class DBFunctions {
         try {
             ContentValues values = new ContentValues();
             values.put(DailyTaskDB.NAME, userData.name);
-
             db.insertOrThrow(DailyTaskDB.TABLE_USERdETAIL, null, values);
             db.setTransactionSuccessful();
         } catch (SQLException e) {
             e.printStackTrace();
             Log.d(DailyTaskDB.TAG, "Error while trying to add post to database");
         } finally {
-
             db.endTransaction();
         }
 
@@ -276,7 +272,8 @@ public class DBFunctions {
         db.beginTransaction();
         try {
             ContentValues values = new ContentValues();
-            values.put(DailyTaskDB.EMPNNAME,userData.roleName);
+            values.put(DailyTaskDB.PRIVILEGENAME,userData.name);
+            values.put(DailyTaskDB.ROLENAME,userData.roleName);
             values.put(DailyTaskDB._CHK_VALUES,userData.chekBoolen);
             db.insertOrThrow(DailyTaskDB.TABLE_ADDROLE, null, values);
             db.setTransactionSuccessful();
@@ -284,7 +281,6 @@ public class DBFunctions {
             e.printStackTrace();
             Log.d(DailyTaskDB.TAG, "Error while trying to add post to database");
         } finally {
-
             db.endTransaction();
         }
 

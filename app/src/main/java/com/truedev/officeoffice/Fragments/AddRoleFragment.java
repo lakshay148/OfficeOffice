@@ -28,8 +28,10 @@ import com.truedev.officeoffice.R;
 
 import java.util.ArrayList;
 
-/**
- * @author ?Ankita
+/** created by Ankita Sharma
+ *
+ /*
+ * @author ?                                   /done
  * Fragment instantiation with newInstance   /done
  * private member fields                     /done
  * member fields should start with m         /done
@@ -41,18 +43,18 @@ import java.util.ArrayList;
 
 public class AddRoleFragment extends Fragment implements Listener, View.OnClickListener {
 
-   private RecyclerView mrecyclerView;
-   private ListAdapter madapter;
-    private EditText mroleName;
-    private CheckBox mcheckBox;
-    private ContentValues contentValues = new ContentValues();
-    private ArrayList<UserData> arrayList = new ArrayList<UserData>();
-    private DailyTaskDB mdailyTaskDB;
-    private Context mcontext;
+   private RecyclerView mRecyclerView;
+   private ListAdapter mAdapter;
+    private EditText mRoleName;
+    private CheckBox mCheckBox;
+    private ContentValues mContentValues = new ContentValues();
+    private ArrayList<UserData> mArrayList = new ArrayList<UserData>();
+    private DailyTaskDB mDailyTaskDB;
+    private Context mContext;
     
     public static AddRoleFragment newInstance(Context applicationContext) {
         AddRoleFragment fragment= new AddRoleFragment();
-        fragment.mcontext=applicationContext;
+        fragment.mContext=applicationContext;
         return fragment;
     }
 
@@ -62,13 +64,13 @@ public class AddRoleFragment extends Fragment implements Listener, View.OnClickL
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_add_role, container, false);
-        mdailyTaskDB = DBFunctions.getInstance(getActivity());
-        mcheckBox = (CheckBox) view.findViewById(R.id.checkbox);
-        mrecyclerView = (RecyclerView) view.findViewById(R.id.rv_contactlist);
-        mroleName= (EditText) view.findViewById(R.id.et_name);
-        madapter = new ListAdapter(this.getActivity(), DBFunctions.getAllUser());
-        mrecyclerView.setAdapter(madapter);
-        mrecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mDailyTaskDB = DBFunctions.getInstance(getActivity());
+        mCheckBox = (CheckBox) view.findViewById(R.id.checkbox);
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.rv_contactlist);
+        mRoleName= (EditText) view.findViewById(R.id.et_name);
+        mAdapter = new ListAdapter(this.getActivity(), DBFunctions.getAllUser());
+        mRecyclerView.setAdapter(mAdapter);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         return view;
     }
 
@@ -83,23 +85,22 @@ public class AddRoleFragment extends Fragment implements Listener, View.OnClickL
     @Override
     public void nameToChnge(String name) {
         DBFunctions.deleteRow(name);
-        madapter = new ListAdapter(getActivity(), DBFunctions.getAllUser());
-        mrecyclerView.setAdapter(madapter);
-        mrecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mAdapter = new ListAdapter(getActivity(), DBFunctions.getAllUser());
+        mRecyclerView.setAdapter(mAdapter);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
     }
 
     @Override
     public void onClick(View v) {
         UserData userData = new UserData();
 
-        if (!mroleName.getText().toString().isEmpty()) {
-            userData.name = mroleName.getText().toString();
+        if (!mRoleName.getText().toString().isEmpty()) {
+            userData.roleName = mRoleName.getText().toString();
         } else {
-            userData.name = "";
+            userData.roleName = "";
         }
         DBFunctions.insertUserRole(userData);
-        Toast.makeText(mcontext, "inserted", Toast.LENGTH_SHORT).show();
-
+        Toast.makeText(mContext, "inserted", Toast.LENGTH_SHORT).show();
         moveToNewActivity();
 
     }

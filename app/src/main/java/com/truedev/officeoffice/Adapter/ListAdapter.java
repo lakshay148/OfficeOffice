@@ -19,23 +19,23 @@ import java.util.List;
 
 
 public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder> {
-    private LayoutInflater minflater;
-    private Context mcontext;
-    private List<UserData> dataList = new ArrayList<>();
+    private LayoutInflater mInflater;
+    private Context mContext;
+    private List<UserData> mDataList = new ArrayList<>();
     private Listener mListner;
 
     public ListAdapter(Context context, List<UserData> dataList1) {
 
-        this.mcontext = context;
-        this.dataList = dataList1;
-        minflater = LayoutInflater.from(context);
+        this.mContext = context;
+        this.mDataList = dataList1;
+        mInflater = LayoutInflater.from(context);
 
     }
 
     @Override
     public ListViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        View convertView = minflater.inflate(R.layout.row, parent, false);
+        View convertView = mInflater.inflate(R.layout.row, parent, false);
         ListViewHolder viewHolder = new ListViewHolder(convertView);
         return viewHolder;
     }
@@ -45,13 +45,13 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
 
 
         holder.iv_delete.setTag(position);
-        holder.tv_name.setText(dataList.get(position).name);
+        holder.tv_name.setText(mDataList.get(position).name);
         holder.checkBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 CheckBox cb = (CheckBox) v;
                 UserData _state = (UserData) cb.getTag();
-                Toast.makeText(mcontext, "Clicked on Checkbox: " + cb.getText() + " is " + cb.isChecked(),
+                Toast.makeText(mContext, "Clicked on Checkbox: " + cb.getText() + " is " + cb.isChecked(),
                         Toast.LENGTH_LONG).show();
 
                 holder.checkBox.setSelected(cb.isChecked());
@@ -61,7 +61,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
         holder.iv_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mListner.nameToChnge(dataList.get((Integer) v.getTag()).name);
+                mListner.nameToChnge(mDataList.get((Integer) v.getTag()).name);
 
 
             }
@@ -71,7 +71,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
 
     @Override
     public int getItemCount() {
-        return dataList.size();
+        return mDataList.size();
     }
 
     class ListViewHolder extends RecyclerView.ViewHolder {

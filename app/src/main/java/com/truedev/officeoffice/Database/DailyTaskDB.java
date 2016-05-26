@@ -32,7 +32,8 @@ public class DailyTaskDB extends SQLiteOpenHelper {
     public static final String TABLE_ADDROLE = "addRole";
     public static final String _ID = "_id";
     public static final String NAME = "name";
-    public static final String EMPNNAME = "empname";
+    public static final String ROLENAME="rolename";
+    public static final String PRIVILEGENAME = "prvlgname";
     public static final String _CHK_VALUES = "checkbox_value";
     public static DailyTaskDB mDbHelper;
 
@@ -67,7 +68,7 @@ public class DailyTaskDB extends SQLiteOpenHelper {
         String CREATE_ADDROLE = "CREATE TABLE " + TABLE_ADDROLE +
                 "(" +
                 _ID + " INTEGER PRIMARY KEY ," +
-                EMPNNAME + " TEXT, " +
+                PRIVILEGENAME + " TEXT, " + ROLENAME + "TEXT," +
                 _CHK_VALUES + " TEXT NOT NULL " +
                 ")";
         String project = "CREATE TABLE " + PROJECT_TABLE + " ( " + ID + " Integer PRIMARY KEY autoincrement , " +

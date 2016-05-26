@@ -19,9 +19,10 @@ import com.truedev.officeoffice.Database.DailyTaskDB;
 import com.truedev.officeoffice.Model.UserData;
 import com.truedev.officeoffice.R;
 
-/**
+/** Created by Ankita sharma
+ *
  * A simple {@link Fragment} subclass.
- * @author ?    Ankita                            /done
+ * @author ?                               /done
  *
  * Fragment instantiation with newInstance  /done
  * private member fields                    /done
@@ -29,14 +30,14 @@ import com.truedev.officeoffice.R;
  * strings to be referred from strings.xml  /done
  */
 public class AddPrivilegeFragment extends Fragment {
-   private EditText met_name;
-   private Button mbtn_next;
-   private Context mcontext;
+   private EditText mEt_name;
+   private Button mBtn_next;
+   private Context mContext;
 
 
     public static AddPrivilegeFragment newInstance(Context applicationContext) {
         AddPrivilegeFragment fragment = new AddPrivilegeFragment();
-        fragment.mcontext=applicationContext;
+        fragment.mContext=applicationContext;
         return fragment;
     }
 
@@ -47,17 +48,17 @@ public class AddPrivilegeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_add_privilege, container, false);
 
 
-        met_name = (EditText) view.findViewById(R.id.et_name);
-        mbtn_next = (Button) view.findViewById(R.id.btn_next);
+        mEt_name = (EditText) view.findViewById(R.id.et_name);
+        mBtn_next = (Button) view.findViewById(R.id.btn_next);
 
 
-        mbtn_next.setOnClickListener(new View.OnClickListener() {
+        mBtn_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 UserData userData = new UserData();
 
-                if (!met_name.getText().toString().isEmpty()) {
-                    userData.name = met_name.getText().toString();
+                if (!mEt_name.getText().toString().isEmpty()) {
+                    userData.name = mEt_name.getText().toString();
                 } else {
                     userData.name = "";
                 }

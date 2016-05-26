@@ -17,7 +17,9 @@ import com.truedev.officeoffice.Activity.MainActivity;
 import com.truedev.officeoffice.DBFunctions;
 import com.truedev.officeoffice.R;
 
-/**
+/** Created by Ankita Sharma
+ *
+ /*
  * A simple {@link Fragment} subclass.
  * @author ?                                /done
  * Fragment instantiation with newInstance  /done
@@ -26,13 +28,13 @@ import com.truedev.officeoffice.R;
  * strings to be referred from strings.xml   /done
  */
 public class AddDomainFragment extends Fragment {
-   private Context mcontext;
-   private EditText meditTextdomainname;
-   private Button mbutton;
+   private Context mContext;
+   private EditText mEditTextdomainname;
+   private Button mButton;
 
     public static AddDomainFragment newInstance(Context applicationContext) {
         AddDomainFragment fragment= new  AddDomainFragment();
-        fragment.mcontext=applicationContext;
+        fragment.mContext=applicationContext;
         return fragment;
     }
 
@@ -41,15 +43,15 @@ public class AddDomainFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_add_domain, container, false);
-        meditTextdomainname = (EditText) view.findViewById(R.id.adddomain);
-        mbutton = (Button) view.findViewById(R.id.add);
+        mEditTextdomainname = (EditText) view.findViewById(R.id.adddomain);
+        mButton = (Button) view.findViewById(R.id.add);
 
-        mbutton.setOnClickListener(new View.OnClickListener() {
+        mButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String namedomain = meditTextdomainname.getText().toString();
+                String namedomain = mEditTextdomainname.getText().toString();
                 if (namedomain.equals("")) {
-                    Toast.makeText(getActivity(), "Field Vaccant", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), "Empty entry", Toast.LENGTH_LONG).show();
                     return;
                 } else {
                     DBFunctions dailyTaskDB = new DBFunctions();

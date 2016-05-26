@@ -35,7 +35,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/adddomain"
-            android:layout_marginLeft="150dp"
+            android:layout_marginLeft="130dp"
             android:gravity="center"
             android:text="@string/submit" />
     </RelativeLayout>
