@@ -62,7 +62,6 @@ public class AddPrivilegeFragment extends Fragment {
                 } else {
                     userData.name = "";
                 }
-
                 DBFunctions.insertUserDetail(userData);
                 Toast.makeText(getActivity(), "Privilege added", Toast.LENGTH_SHORT).show();
                 moveToNewActivity();

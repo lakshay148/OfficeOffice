@@ -75,7 +75,11 @@ public class UserData implements Serializable {
         this.chekBoolen = chekBoolen;
     }
 
+    public String getRoleName() { return roleName;}
+
+    public void setRoleName(String roleName) { this.roleName = roleName;}
     public String name ="";
+    public String roleName="";
     public boolean chekBoolen=false;
     public String emp_name = "null";
     public String emp_id = "null";
