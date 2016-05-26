@@ -18,7 +18,7 @@ import java.util.ArrayList;
  */
 public class AddTaskAdapter extends BaseAdapter {
 
-    private Context mContext;
+    private Context mContext ;
     private ArrayList<RowData> mRowDatas;
     private TextView  mTaskData;
     private ImageView mRemoveData;
@@ -46,6 +46,8 @@ public class AddTaskAdapter extends BaseAdapter {
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
+
+
         LayoutInflater inflater = (LayoutInflater) mContext
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View rowView = inflater.inflate(R.layout.dynamic_list, parent, false);

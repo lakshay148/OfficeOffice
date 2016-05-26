@@ -1,6 +1,6 @@
 package com.truedev.officeoffice.Fragments;
 
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Context;
 import android.os.Bundle;
@@ -73,13 +73,8 @@ public class ProjectsFragment extends Fragment {
                 int itemPosition = position;
                 String  itemValue = (String) listView.getItemAtPosition(position);
                 if(itemPosition <= project.size()) {
-                    Fragment fragment = new AddTaskFragment();
-                    ProjectsFragment.newInstance(getContext());
-                    Bundle bundle=new Bundle();
-                    bundle.putString("Project", ""+((TextView)view.findViewById(R.id.project)).getText().toString());
-                    fragment.setArguments(bundle);
-                    FragmentManager fragmentManager = getFragmentManager();
-                    fragmentManager.beginTransaction().replace(R.id.content_frame,fragment).addToBackStack(null).commit();
+                    String project =((TextView)view.findViewById(R.id.project)).getText().toString();
+                    getFragmentManager().beginTransaction().replace(R.id.content_frame,AddTaskFragment.newInstance(mContext,project)).addToBackStack(null).commit();
                 }
                 Toast.makeText(getActivity(), itemValue , Toast.LENGTH_LONG).show();
             }

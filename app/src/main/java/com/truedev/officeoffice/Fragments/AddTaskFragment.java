@@ -1,7 +1,7 @@
 package com.truedev.officeoffice.Fragments;
 
 import android.app.Activity;
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -42,16 +42,17 @@ public class AddTaskFragment extends Fragment {
     private ImageView mAddTask;
     private ListView mListShowData;
     private Button mSave;
-    private String mProject;
+    private static String mProject;
     private TextView mdataTask;
     private ArrayList<RowData> mTaskRowData = new ArrayList<RowData>();
     private ArrayList<String> mTask = new ArrayList<String>();
     private AddTaskAdapter mDynamicAdapter;
     private Context mContext;
 
-    public static AddTaskFragment newInstance(Context applicationContext) {
+    public static AddTaskFragment newInstance(Context applicationContext, String project) {
         AddTaskFragment fragment = new AddTaskFragment();
         fragment.mContext = applicationContext;
+        mProject = project;
         return fragment;
     }
 
@@ -61,7 +62,6 @@ public class AddTaskFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.add_layout,container,false);
 
-        mProject=getArguments().getString("Project");
         mGetTask = (EditText)view.findViewById(R.id.get_task);
         mAddTask = (ImageView)view.findViewById(R.id.add_task);
         mListShowData = (ListView)view.findViewById(R.id.add_layout);
@@ -78,7 +78,7 @@ public class AddTaskFragment extends Fragment {
                 else {
                     String task = mGetTask.getText().toString();
                     mTaskRowData.add(new RowData(task));
-                    mDynamicAdapter = new AddTaskAdapter(mContext, mTaskRowData);
+                    mDynamicAdapter = new AddTaskAdapter(getActivity(), mTaskRowData);
                     mListShowData.setAdapter(mDynamicAdapter);
                     mGetTask.setText("");
                 }

@@ -1,7 +1,5 @@
 package com.truedev.officeoffice.Activity;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
@@ -68,48 +66,34 @@ public class MainActivity extends AppCompatActivity {
     private void selectItem(int position) {
         switch (position) {
             case 0:
-                Fragment fragment = ProjectsFragment.newInstance(this);
                 getSupportActionBar().setTitle("Projects");
-                FragmentManager fragmentManager = getFragmentManager();
-                fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, ProjectsFragment.newInstance(this)).commit();
                 break;
 
-            case 1:
-                Fragment fragment1 = AddModelFragment.newInstance(this);
+           case 1:
                 getSupportActionBar().setTitle("Add Model");
-                FragmentManager fragmentManager1 = getFragmentManager();
-                fragmentManager1.beginTransaction().replace(R.id.content_frame, fragment1).commit();
+               getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, AddModelFragment.newInstance(this)).commit();
                 break;
             case 2:
-                Fragment fragment2 =EmployeeFragment.newInstance(this);
                 getSupportActionBar().setTitle("EmployeeFragment");
-                FragmentManager fragmentManager2 = getFragmentManager();
-                fragmentManager2.beginTransaction().replace(R.id.content_frame, fragment2).commit();
+                getFragmentManager().beginTransaction().replace(R.id.content_frame, EmployeeFragment.newInstance(this)).commit();
                 break;
             case 3:
-                Fragment fragment3 = AddDomainFragment.newInstance(this);
-                getSupportActionBar().setTitle("AddDomainFragment");
-                FragmentManager fragmentManager3 = getFragmentManager();
-                fragmentManager3.beginTransaction().replace(R.id.content_frame, fragment3).commit();
+                getSupportActionBar().setTitle("Add Domain");
+                getFragmentManager().beginTransaction().replace(R.id.content_frame, AddDomainFragment.newInstance(this)).commit();
                 break;
             case 4:
-                Fragment fragment4 = AddPrivilegeFragment.newInstance(this);
-                getSupportActionBar().setTitle("AddPrivilegeFragment");
-                FragmentManager fragmentManager4 = getFragmentManager();
-                fragmentManager4.beginTransaction().replace(R.id.content_frame, fragment4).commit();
+                getSupportActionBar().setTitle("Add Privilege");
+                getFragmentManager().beginTransaction().replace(R.id.content_frame, AddPrivilegeFragment.newInstance(this)).commit();
                 break;
-            case 5:
-                Fragment fragment5 = AddRoleFragment.newInstance(this);
-                getSupportActionBar().setTitle("AddRoleFragment");
-                FragmentManager fragmentManager5 = getFragmentManager();
-                fragmentManager5.beginTransaction().replace(R.id.content_frame, fragment5).commit();
+              case 5:
+                getSupportActionBar().setTitle("Add Role");
+                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, AddRoleFragment.newInstance(this)).commit();
                 break;
 
             case 6:
-                Fragment fragment6=ShowAllTask.newInstance(this);
-                getSupportActionBar().setTitle("Show all Task");
-                FragmentManager fragmentManager6= getFragmentManager();
-                fragmentManager6.beginTransaction().replace(R.id.content_frame,fragment6).commit();
+                getSupportActionBar().setTitle("Show All Task");
+                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,ShowAllTask.newInstance(this)).commit();
                 break;
 
             case 7:
@@ -180,10 +164,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        Fragment fragment = new ProjectsFragment();
         getSupportActionBar().setTitle("Projects");
-        FragmentManager fragmentManager = getFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, ProjectsFragment.newInstance(this)).commit();
+
 
     }
 
