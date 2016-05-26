@@ -3,6 +3,7 @@ package com.truedev.officeoffice.Database;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 /**
  * Created by dipanshugarg on 17/5/16.
@@ -10,11 +11,13 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class DailyTaskDB extends SQLiteOpenHelper {
 
     public static final String DATABASE_NAME = "DailyTaskdb";
-    public static final String TABLE_TASK = "DailyTask";
     public static final String ID = "_id";
-    public static final String TABLE_ADD_MODEL = "AddModelFragment";
-    public static final String TABLE_EMPLOYEE = "EmployeeFragment";
+
+    public static final String TABLE_TASK = "DailyTask";
     public static final String TABLE_ADDDOMAIN = "DomainFragment";
+    public static final String TABLE_EMPdETAIL = "empdetail";
+    public static final String TABLE_MODULE = "addmodule";
+
     public static final String Task = "task";
     public static final String Name = "name";
     public static final String EID = "eID";
@@ -36,6 +39,13 @@ public class DailyTaskDB extends SQLiteOpenHelper {
     public static final String _CHK_VALUES = "checkbox_value";
     public static DailyTaskDB mDbHelper;
 
+    public static final String EMPNAME = "name";
+    public static final String EMPID = "empid";
+    public static final String EMPPASSWORD = "password";
+    public static final String EMPROLE = "role";
+    public static final String ADDMODULEROLE = "modulerole";
+    public static final String ADDMODULEDOMAIN = "moduledomain";
+
 
 
     public DailyTaskDB(Context context) {
@@ -44,12 +54,6 @@ public class DailyTaskDB extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-
-        String CREATE_Emp_ADD_MODEL_TABLE = "create table " + TABLE_ADD_MODEL +
-                "( " + "ID" + " integer primary key autoincrement," + "EMPID text,OWNER text ,DOMAIN text); ";
-
-        String addEmployee = "CREATE TABLE " + TABLE_EMPLOYEE +
-                "( " + "ID" + " integer primary key autoincrement," + "EMPNAME text ,EMPID text,PASSWORD text ,ROLE text); ";
 
         String addDomain = "CREATE TABLE " + TABLE_ADDDOMAIN +
                 "( " + "ID" + " integer primary key autoincrement," + "DOMAINNAME text); ";
@@ -73,12 +77,36 @@ public class DailyTaskDB extends SQLiteOpenHelper {
         String project = "CREATE TABLE " + PROJECT_TABLE + " ( " + ID + " Integer PRIMARY KEY autoincrement , " +
                 PROJECT_NAME_FIELD + " TEXT " + " ) ";
 
+        String CREATE_EMPDETAIL_TABLE = "CREATE TABLE " + TABLE_EMPdETAIL +
+                "(" +
+                _ID + " INTEGER PRIMARY KEY ," +
+                EMPID + " TEXT, " +
+                EMPNAME + " TEXT, " +
+                EMPPASSWORD + " TEXT, " +
+                EMPROLE + " TEXT " +
+                ")";
+        String CREATE_ADDMODULE_TABLE = "CREATE TABLE " + TABLE_MODULE +
+                "(" +
+                _ID + " INTEGER PRIMARY KEY , " +
+                EMPID + " TEXT, " +
+                ADDMODULEDOMAIN + " TEXT, " +
+                ADDMODULEROLE + " TEXT  " +
+                ")";
+
+        Log.e("Add Domain",addDomain);
+        Log.e("Task",task);
+        Log.e("CREATE_USERDETAIL_TABLE",CREATE_USERDETAIL_TABLE);
+        Log.e("CREATE_ADDROLE",CREATE_ADDROLE);
+        Log.e("project",project);
+        Log.e("CREATE_EMPDETAIL_TABLE",CREATE_EMPDETAIL_TABLE);
+        Log.e("CREATE_ADDMODULE_TABLE",CREATE_ADDMODULE_TABLE);
+
         db.execSQL(CREATE_ADDROLE);
+        db.execSQL(CREATE_EMPDETAIL_TABLE);
         db.execSQL(CREATE_USERDETAIL_TABLE);
         db.execSQL(task);
         db.execSQL(project);
-        db.execSQL(CREATE_Emp_ADD_MODEL_TABLE);
-        db.execSQL(addEmployee);
+        db.execSQL(CREATE_ADDMODULE_TABLE);
         db.execSQL(addDomain);
     }
 
@@ -86,13 +114,12 @@ public class DailyTaskDB extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_TASK);
         db.execSQL("DROP TABLE IF EXISTS "+ PROJECT_TABLE);
-
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_ADD_MODEL);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_EMPLOYEE);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_ADDDOMAIN);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_USERdETAIL);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_ADDROLE);
-
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_EMPdETAIL);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_MODULE);
+        onCreate(db);
     }
 
 }

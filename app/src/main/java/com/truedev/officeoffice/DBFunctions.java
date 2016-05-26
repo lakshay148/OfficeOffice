@@ -145,47 +145,6 @@ public class DBFunctions {
         }
     }
 
-
-
-    public void insertEntryADDModel( String empID,String domain, String role) {
-        SQLiteDatabase db = ApplicationController.getTasksDB(true);
-
-        try {
-            db.beginTransaction();
-
-        }catch (SQLException e){
-            e.printStackTrace();
-            ContentValues newValues = new ContentValues();
-            newValues.put("EmpID", empID);
-            newValues.put("Owner", domain);
-            newValues.put("ROLE", role);
-            db.insert(DailyTaskDB.TABLE_ADD_MODEL, null, newValues);
-        }
-        finally {
-            db.endTransaction();
-        }
-    }
-
-
-    public void insertEntry(String empName, String owner, String empID, String domain) {
-        SQLiteDatabase db = ApplicationController.getTasksDB(true);
-        try {
-            ContentValues newValues = new ContentValues();
-            newValues.put("EMPNAME", empName);
-            newValues.put("EmpID", empID);
-            newValues.put("PASSWORD", owner);
-            newValues.put("ROLE", domain);
-            db.insert(DailyTaskDB.TABLE_EMPLOYEE, null, newValues);
-
-        }catch (SQLException e){
-            e.printStackTrace();
-        }
-        finally {
-            db.endTransaction();
-        }
-
-    }
-
     public void insertEntryAddDomain(String addDomain) {
         SQLiteDatabase db = ApplicationController.getTasksDB(true);
         try {
@@ -276,7 +235,7 @@ public class DBFunctions {
         db.beginTransaction();
         try {
             ContentValues values = new ContentValues();
-            values.put(DailyTaskDB.EMPNNAME,userData.roleName);
+            values.put(DailyTaskDB.EMPNNAME,userData.name);
             values.put(DailyTaskDB._CHK_VALUES,userData.chekBoolen);
             db.insertOrThrow(DailyTaskDB.TABLE_ADDROLE, null, values);
             db.setTransactionSuccessful();
@@ -298,6 +257,48 @@ public class DBFunctions {
     }
 
 
+    public static void insertEmpDetail(UserData userData) {
+        SQLiteDatabase db = ApplicationController.getTasksDB(true);
+        db.beginTransaction();
+        try {
+            ContentValues values = new ContentValues();
+            values.put(DailyTaskDB.EMPNAME, userData.emp_name);
+            values.put(DailyTaskDB.EMPID, userData.emp_id);
+            values.put(DailyTaskDB.EMPPASSWORD, userData.emp_password);
+            values.put(DailyTaskDB.EMPROLE, userData.emp_role);
+            db.insertOrThrow(DailyTaskDB.TABLE_EMPdETAIL, null, values);
+            db.setTransactionSuccessful();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            Log.d(DailyTaskDB.TAG, "Error while trying to add post to database");
+        } finally {
+            db.endTransaction();
+        }
+    }
+    public static void insertModuleDetail(UserData userData) {
 
+        SQLiteDatabase db = ApplicationController.getTasksDB(true);
+
+        db.beginTransaction();
+
+        try {
+            ContentValues values = new ContentValues();
+
+            values.put(DailyTaskDB.EMPID, userData.emp_id);
+            values.put(DailyTaskDB.ADDMODULEDOMAIN, userData.module_domain);
+            values.put(DailyTaskDB.ADDMODULEROLE, userData.module_role);
+
+            db.insertOrThrow(DailyTaskDB.TABLE_EMPdETAIL, null, values);
+            db.setTransactionSuccessful();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            Log.d(DailyTaskDB.TAG, "Error while trying to add post to database");
+        } finally {
+
+            db.endTransaction();
+        }
+
+
+    }
 
 }

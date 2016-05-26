@@ -2,7 +2,7 @@ package com.truedev.officeoffice.Fragments;
 
 
 import android.app.Activity;
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -56,6 +56,7 @@ public class AddDomainFragment extends Fragment {
                     dailyTaskDB.insertEntryAddDomain(namedomain);
                     Toast.makeText(getActivity(), "Doamin Successfully Added", Toast.LENGTH_LONG).show();
                     moveToNewActivity();
+
                 }
             }
         });
