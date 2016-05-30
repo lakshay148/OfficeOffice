@@ -101,15 +101,15 @@ public class DBFunctions {
 
             if(cursor!=null) {
                 cursor.moveToFirst();
-                do{
+                while (!cursor.isAfterLast()) {
                     projectModel = new ProjectModel();
                     projectModel.setDate(cursor.getString(cursor.getColumnIndex(DailyTaskDB.Date)));
                     projectModel.setProject(cursor.getString(cursor.getColumnIndex(DailyTaskDB.PROJECT)));
                     projectModel.setTask((ArrayList<String>)CommonUtils.deserialize(cursor.getBlob(cursor.getColumnIndex(DailyTaskDB.Task))));
                     arrayList.add(projectModel);
-
+                    cursor.moveToNext();
                 }
-                while (cursor.moveToNext());
+
 
             }
         } catch (SQLException e){
