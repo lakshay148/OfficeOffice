@@ -143,7 +143,6 @@ public class DBFunctions {
             db.endTransaction();
         }
     }
-
     public void insertEntryAddDomain(String addDomain) {
         SQLiteDatabase db = ApplicationController.getTasksDB(true);
         try {
