@@ -1,6 +1,7 @@
 package com.truedev.officeoffice.Fragments;
 
 import android.app.Activity;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v4.app.Fragment;
 import android.content.ContentValues;
 import android.content.Context;
@@ -37,7 +38,7 @@ import java.util.List;
  */
 
 
-public class AddRoleFragment extends DialogFragment implements Listener, View.OnClickListener {
+public class AddRoleFragment extends Fragment implements Listener, View.OnClickListener {
 
     private RecyclerView mRecyclerView;
     private ListAdapter mAdapter;
@@ -96,14 +97,19 @@ public class AddRoleFragment extends DialogFragment implements Listener, View.On
                 data = data + "\n" + singleStudent.getName().toString();
             }
         }
+        if (roleName.equals("")) {
+            Toast.makeText(getActivity(), "Empty entry", Toast.LENGTH_LONG).show();
+            return;
+        } else {
+            mDailyTaskDB = new DailyTaskDB(mContext);
+            mSqLiteDatabase = mDailyTaskDB.getWritableDatabase();
+            DBFunctions.addRole(roleName, data, mSqLiteDatabase);
+            Toast.makeText(getActivity(), "Data saved", Toast.LENGTH_LONG).show();
+            mDailyTaskDB.close();
 
-        mDailyTaskDB = new DailyTaskDB(mContext);
-        mSqLiteDatabase = mDailyTaskDB.getWritableDatabase();
-        DBFunctions.addRole(roleName, data, mSqLiteDatabase);
-        Toast.makeText(getActivity(), "Data saved", Toast.LENGTH_LONG).show();
-        mDailyTaskDB.close();
+            moveToNewActivity();
+        }
 
-        moveToNewActivity();
 
     }
 
