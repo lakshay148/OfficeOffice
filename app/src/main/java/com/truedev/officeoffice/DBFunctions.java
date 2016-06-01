@@ -148,8 +148,8 @@ public class DBFunctions {
         try {
             ContentValues newValues = new ContentValues();
             newValues.put(DailyTaskDB.Domain, addDomain);
-            db.insert(DailyTaskDB.TABLE_ADDDOMAIN, null, newValues);
-        }catch (SQLException e) {
+            db.insert(DailyTaskDB.TABLE_ADDDOMAIN,null,newValues);
+        }catch (SQLException e){
             e.printStackTrace();
         }
         
