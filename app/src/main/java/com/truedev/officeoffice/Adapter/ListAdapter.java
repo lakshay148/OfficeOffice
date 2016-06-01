@@ -35,37 +35,38 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
     @Override
     public ListViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        View convertView = mInflater.inflate(R.layout.row, parent, false);
+        View convertView = mInflater.inflate(R.layout.add_role_list, parent, false);
         ListViewHolder viewHolder = new ListViewHolder(convertView);
         return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(final ListViewHolder holder, final int position) {
+        final int pos = position;
 
-
-        holder.iv_delete.setTag(position);
+// holder.iv_delete.setTag(position);
         holder.tv_name.setText(mDataList.get(position).name);
-        holder.checkBox.setOnClickListener(new View.OnClickListener() {
-            @Override
+        holder.chkSelected.setChecked(mDataList.get(position).isSelected());
+
+        holder.chkSelected.setTag(mDataList.get(position));
+        holder.chkSelected.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 CheckBox cb = (CheckBox) v;
-                UserData _state = (UserData) cb.getTag();
-                Toast.makeText(mContext, "Clicked on Checkbox: " + cb.getText() + " is " + cb.isChecked(),
-                        Toast.LENGTH_LONG).show();
-
-                holder.checkBox.setSelected(cb.isChecked());
+                UserData contact = (UserData) cb.getTag();
+                contact.setSelected(cb.isChecked());
+                mDataList.get(pos).setSelected(cb.isChecked());
             }
         });
 
-        holder.iv_delete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mListner.nameToChnge(mDataList.get((Integer) v.getTag()).name);
+
+/*holder.iv_delete.setOnClickListener(new View.OnClickListener() {
+@Override
+public void onClick(View v) {
+mListner.nameToChnge(mDataList.get((Integer) v.getTag()).name);
 
 
-            }
-        });
+}
+});*/
 
     }
 
@@ -75,20 +76,22 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
     }
 
     class ListViewHolder extends RecyclerView.ViewHolder {
-        TextView tv_name;
-        CheckBox checkBox;
-        ImageView iv_delete;
-
+        public TextView tv_name;
+        public CheckBox chkSelected;
+        public ImageView iv_delete;
+        public UserData userData;
         public ListViewHolder(View itemView) {
             super(itemView);
 
             tv_name = (TextView) itemView.findViewById(R.id.tv_name);
             iv_delete = (ImageView) itemView.findViewById(R.id.iv_delete);
-            checkBox = (CheckBox) itemView.findViewById(R.id.checkbox);
+            chkSelected = (CheckBox) itemView.findViewById(R.id.checkbox);
 
 
         }
     }
 
-
+    public List<UserData> getStudentist() {
+        return mDataList;
+    }
 }

@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 
 public class UserData implements Serializable {
+    public boolean isSelected;
     public String name ="";
     public String roleName="";
     public boolean chekBoolen=false;
@@ -15,6 +16,17 @@ public class UserData implements Serializable {
     public String module_domain = "domain";
     public String module_empID = "empId";
 
+    public UserData(){
+
+    }
+    public UserData(String name) {
+        this.name = name;
+    }
+
+    public UserData(boolean isSelected, String name) {
+        this.isSelected = isSelected;
+        this.name = name;
+    }
 
     public String getEmp_id() {
         return emp_id;
@@ -79,16 +91,14 @@ public class UserData implements Serializable {
         this.name = name;
     }
 
-    public boolean isChekBoolen() {
-        return chekBoolen;
-    }
-
-    public void setChekBoolen(boolean chekBoolen) {
-        this.chekBoolen = chekBoolen;
-    }
-
     public String getRoleName() { return roleName;}
 
     public void setRoleName(String roleName) { this.roleName = roleName;}
 
+    public boolean isSelected() {
+        return isSelected;
+    }
+    public void setSelected(boolean selected) {
+        isSelected = selected;
+    }
 }

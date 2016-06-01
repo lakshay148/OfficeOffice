@@ -72,8 +72,8 @@ public class DailyTaskDB extends SQLiteOpenHelper {
         String CREATE_ADDROLE = "CREATE TABLE " + TABLE_ADDROLE +
                 "(" +
                 _ID + " INTEGER PRIMARY KEY ," +
-                PRIVILEGENAME + " TEXT, " + ROLENAME + "TEXT," +
-                _CHK_VALUES + " TEXT NOT NULL " +
+                ROLENAME + " TEXT ," +
+                PRIVILEGENAME + " TEXT " +
                 ")";
         String project = "CREATE TABLE " + PROJECT_TABLE + " ( " + ID + " Integer PRIMARY KEY autoincrement , " +
                 PROJECT_NAME_FIELD + " TEXT " + " ) ";
