@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by pra on 19/5/16.
+ * Created by Ankita sharma
  */
 public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder> {
     private LayoutInflater mInflater;
@@ -68,7 +68,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
 
 
             }
-        });*/
+      });*/
 
     }
 

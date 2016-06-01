@@ -44,8 +44,8 @@ public class AddRoleFragment extends Fragment implements Listener, View.OnClickL
     private ListAdapter mAdapter;
     private EditText mRoleName;
     private CheckBox mCheckBox;
-    private ContentValues mContentValues = new ContentValues();
-    private ArrayList<UserData> mArrayList = new ArrayList<UserData>();
+    private ContentValues mContentValues;
+    private ArrayList<UserData> mArrayList;
     private DailyTaskDB mDailyTaskDB;
     private Context mContext;
     private Button mSubmit;
@@ -69,6 +69,8 @@ public class AddRoleFragment extends Fragment implements Listener, View.OnClickL
         mRecyclerView = (RecyclerView) view.findViewById(R.id.rv_contactlist);
         mRoleName = (EditText) view.findViewById(R.id.et_name);
         mSubmit.setOnClickListener(this);
+        mContentValues = new ContentValues();
+        mArrayList = new ArrayList<UserData>();
         mAdapter = new ListAdapter(this.getActivity(), DBFunctions.getAllUser());
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -82,8 +84,6 @@ public class AddRoleFragment extends Fragment implements Listener, View.OnClickL
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));*/
     }
-
-
     @Override
     public void onClick(View v) {
         String roleName = mRoleName.getText().toString();
