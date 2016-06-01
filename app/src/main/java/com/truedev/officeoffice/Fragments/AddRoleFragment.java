@@ -1,8 +1,6 @@
 package com.truedev.officeoffice.Fragments;
 
 import android.app.Activity;
-import android.database.sqlite.SQLiteDatabase;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.content.ContentValues;
 import android.content.Context;

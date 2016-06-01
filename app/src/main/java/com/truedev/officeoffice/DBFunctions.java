@@ -21,22 +21,22 @@ public class DBFunctions {
 
     ProjectModel projectModel = new ProjectModel();
 
-    public long insertTask(ArrayList<String> taskList, String date, String project) {
+    public long insertTask(ArrayList<String> taskList, String date,String project) {
         SQLiteDatabase db = ApplicationController.getTasksDB(true);
         long success = 0;
-        try {
+        try{
             db.beginTransaction();
             ContentValues values = new ContentValues();
 
-            values.put(DailyTaskDB.Task, CommonUtils.serialize(taskList));
-            values.put(DailyTaskDB.Date, date);
-            values.put(DailyTaskDB.PROJECT, project);
-            success = db.insert(DailyTaskDB.TABLE_TASK, null, values);
+            values.put(DailyTaskDB.Task,CommonUtils.serialize(taskList));
+            values.put(DailyTaskDB.Date,date);
+            values.put(DailyTaskDB.PROJECT,project);
+            success = db.insert(DailyTaskDB.TABLE_TASK, null,values);
 
 
             db.setTransactionSuccessful();
 
-        } catch (SQLException e) {
+        } catch (SQLException e){
             e.printStackTrace();
         } finally {
             db.endTransaction();
@@ -96,23 +96,23 @@ public class DBFunctions {
         ProjectModel projectModel;
         SQLiteDatabase sqLiteDatabase = ApplicationController.getTasksDB(false);
         try {
-            cursor = sqLiteDatabase.query(true, DailyTaskDB.TABLE_TASK,
-                    new String[]{DailyTaskDB.Task, DailyTaskDB.Date, DailyTaskDB.PROJECT}, null, null, null, null, null, null);
+            cursor = sqLiteDatabase.query(true,DailyTaskDB.TABLE_TASK,
+                    new String[]{DailyTaskDB.Task,DailyTaskDB.Date,DailyTaskDB.PROJECT}, null ,null,null,null,null,null);
 
-            if (cursor != null) {
+            if(cursor!=null) {
                 cursor.moveToFirst();
-                do {
+                while (!cursor.isAfterLast()) {
                     projectModel = new ProjectModel();
                     projectModel.setDate(cursor.getString(cursor.getColumnIndex(DailyTaskDB.Date)));
                     projectModel.setProject(cursor.getString(cursor.getColumnIndex(DailyTaskDB.PROJECT)));
-                    projectModel.setTask((ArrayList<String>) CommonUtils.deserialize(cursor.getBlob(cursor.getColumnIndex(DailyTaskDB.Task))));
+                    projectModel.setTask((ArrayList<String>)CommonUtils.deserialize(cursor.getBlob(cursor.getColumnIndex(DailyTaskDB.Task))));
                     arrayList.add(projectModel);
-
+                    cursor.moveToNext();
                 }
-                while (cursor.moveToNext());
+
 
             }
-        } catch (SQLException e) {
+        } catch (SQLException e){
             e.printStackTrace();
         }
 
