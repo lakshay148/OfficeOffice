@@ -25,11 +25,11 @@ import com.truedev.officeoffice.R;
  *@auther : Prashant chauhan
  *
  *
- * Review Comments :
- * default Constructor
- * private fields
- * strings to be referred from strings.xml
- * insert data with class objects
+ * Review Comments : done
+ * default Constructor :done
+ * private fields :done
+ * strings to be referred from strings.xml :done
+ * insert data with class objects :done
  *
  * owner and domain to be picked from db
  *

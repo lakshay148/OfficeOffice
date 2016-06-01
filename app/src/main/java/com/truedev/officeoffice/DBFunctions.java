@@ -21,22 +21,22 @@ public class DBFunctions {
 
     ProjectModel projectModel = new ProjectModel();
 
-    public long insertTask(ArrayList<String> taskList, String date,String project) {
+    public long insertTask(ArrayList<String> taskList, String date, String project) {
         SQLiteDatabase db = ApplicationController.getTasksDB(true);
         long success = 0;
-        try{
+        try {
             db.beginTransaction();
             ContentValues values = new ContentValues();
 
-            values.put(DailyTaskDB.Task,CommonUtils.serialize(taskList));
-            values.put(DailyTaskDB.Date,date);
-            values.put(DailyTaskDB.PROJECT,project);
-            success = db.insert(DailyTaskDB.TABLE_TASK, null,values);
+            values.put(DailyTaskDB.Task, CommonUtils.serialize(taskList));
+            values.put(DailyTaskDB.Date, date);
+            values.put(DailyTaskDB.PROJECT, project);
+            success = db.insert(DailyTaskDB.TABLE_TASK, null, values);
 
 
             db.setTransactionSuccessful();
 
-        } catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             db.endTransaction();
@@ -96,23 +96,23 @@ public class DBFunctions {
         ProjectModel projectModel;
         SQLiteDatabase sqLiteDatabase = ApplicationController.getTasksDB(false);
         try {
-            cursor = sqLiteDatabase.query(true,DailyTaskDB.TABLE_TASK,
-                    new String[]{DailyTaskDB.Task,DailyTaskDB.Date,DailyTaskDB.PROJECT}, null ,null,null,null,null,null);
+            cursor = sqLiteDatabase.query(true, DailyTaskDB.TABLE_TASK,
+                    new String[]{DailyTaskDB.Task, DailyTaskDB.Date, DailyTaskDB.PROJECT}, null, null, null, null, null, null);
 
-            if(cursor!=null) {
+            if (cursor != null) {
                 cursor.moveToFirst();
-                do{
+                do {
                     projectModel = new ProjectModel();
                     projectModel.setDate(cursor.getString(cursor.getColumnIndex(DailyTaskDB.Date)));
                     projectModel.setProject(cursor.getString(cursor.getColumnIndex(DailyTaskDB.PROJECT)));
-                    projectModel.setTask((ArrayList<String>)CommonUtils.deserialize(cursor.getBlob(cursor.getColumnIndex(DailyTaskDB.Task))));
+                    projectModel.setTask((ArrayList<String>) CommonUtils.deserialize(cursor.getBlob(cursor.getColumnIndex(DailyTaskDB.Task))));
                     arrayList.add(projectModel);
 
                 }
                 while (cursor.moveToNext());
 
             }
-        } catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
 
@@ -145,17 +145,16 @@ public class DBFunctions {
     }
 
 
-
     public void insertEntryAddDomain(String addDomain) {
         SQLiteDatabase db = ApplicationController.getTasksDB(true);
         try {
             ContentValues newValues = new ContentValues();
             newValues.put(DailyTaskDB.Domain, addDomain);
             db.insert(DailyTaskDB.TABLE_ADDDOMAIN, null, newValues);
-        }catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
-        
+
     }
 
 
@@ -225,26 +224,7 @@ public class DBFunctions {
 
 
     }
-    public static void insertUserRole(UserData userData) {
 
-        SQLiteDatabase db = ApplicationController.getTasksDB(true);
-
-        db.beginTransaction();
-        try {
-            ContentValues values = new ContentValues();
-            values.put(DailyTaskDB.PRIVILEGENAME,userData.name);
-            values.put(DailyTaskDB.ROLENAME,userData.roleName);
-            values.put(DailyTaskDB._CHK_VALUES,userData.chekBoolen);
-            db.insertOrThrow(DailyTaskDB.TABLE_ADDROLE, null, values);
-            db.setTransactionSuccessful();
-        } catch (SQLException e) {
-            e.printStackTrace();
-            Log.d(DailyTaskDB.TAG, "Error while trying to add post to database");
-        } finally {
-            db.endTransaction();
-        }
-
-    }
     public static synchronized DailyTaskDB getInstance(Context context) {
 
         if (DailyTaskDB.mDbHelper == null) {
@@ -272,6 +252,7 @@ public class DBFunctions {
             db.endTransaction();
         }
     }
+
     public static void insertModuleDetail(UserData userData) {
 
         SQLiteDatabase db = ApplicationController.getTasksDB(true);
@@ -296,6 +277,16 @@ public class DBFunctions {
         }
 
 
+    }
+
+    public static void addRole(String roleName, String privilegename, SQLiteDatabase db) {
+
+        ContentValues contentValue = new ContentValues();
+        contentValue.put(DailyTaskDB.ROLENAME, roleName);
+        contentValue.put(DailyTaskDB.PRIVILEGENAME, privilegename);
+
+        db.insert(DailyTaskDB.TABLE_ADDROLE, null, contentValue);
+        Log.e("DATABASE OPERATION", "One row is insert");
     }
 
 }
