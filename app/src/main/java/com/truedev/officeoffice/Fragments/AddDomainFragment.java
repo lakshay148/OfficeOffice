@@ -67,7 +67,8 @@ public class AddDomainFragment extends Fragment {
                     call.enqueue(new Callback<DomainModel>() {
                         @Override
                         public void onResponse(Response<DomainModel> response, Retrofit retrofit) {
-
+                            Toast.makeText(getActivity(), "Doamin Successfully Added", Toast.LENGTH_LONG).show();
+                            moveToNewActivity();
                         }
 
                         @Override
@@ -75,9 +76,6 @@ public class AddDomainFragment extends Fragment {
                             Log.e("Add Domain Failure", t+"");
                         }
                     });
-
-                    Toast.makeText(getActivity(), "Doamin Successfully Added", Toast.LENGTH_LONG).show();
-                    moveToNewActivity();
 
                 }
             }

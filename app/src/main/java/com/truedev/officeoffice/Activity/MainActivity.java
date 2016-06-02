@@ -23,6 +23,7 @@ import com.truedev.officeoffice.Fragments.AddDomainFragment;
 import com.truedev.officeoffice.Fragments.AddModuleFragment;
 import com.truedev.officeoffice.Fragments.AddPrivilegeFragment;
 import com.truedev.officeoffice.Fragments.AddRoleFragment;
+import com.truedev.officeoffice.Fragments.DomainFragmnet;
 import com.truedev.officeoffice.Fragments.EmployeeFragment;
 import com.truedev.officeoffice.Fragments.ProjectsFragment;
 import com.truedev.officeoffice.Fragments.ShowAllTask;
@@ -44,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         initializeView();
         setUpDrawerLayout();
 
-        final String[] values = new String[]{"Projects", "Add Module", "Employee Fragment", "Add Domain", "Add Privilege","Add Role","Show All Task" , "Logout"};
+        final String[] values = new String[]{"Projects", "Add Module", "Employee Fragment", "Add Domain", "Add Privilege","Add Role","Show All Task" , "Show Domain","Logout"};
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_1, android.R.id.text1, values);
@@ -96,6 +97,11 @@ public class MainActivity extends AppCompatActivity {
                 break;
 
             case 7:
+                getSupportActionBar().setTitle("Show Domain");
+                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, DomainFragmnet.newInstance(this)).addToBackStack("Show Domain").commit();
+                break;
+
+            case 8:
                 SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
                 SharedPreferences.Editor toEdit = prefs.edit();
                 toEdit.putBoolean(Constants.IS_LOGGED_IN, false);
