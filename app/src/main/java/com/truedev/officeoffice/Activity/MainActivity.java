@@ -64,36 +64,37 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void selectItem(int position) {
+
         switch (position) {
             case 0:
                 getSupportActionBar().setTitle("Projects");
-                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, ProjectsFragment.newInstance(this)).addToBackStack("ProjectFragment").commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, ProjectsFragment.newInstance(this)).addToBackStack(null).commit();
                 break;
 
            case 1:
                 getSupportActionBar().setTitle("Add Model");
-               getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, AddModuleFragment.newInstance(this)).addToBackStack("AddModuleFragment").commit();
+               getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, AddModuleFragment.newInstance(this)).addToBackStack(null).commit();
                 break;
             case 2:
                 getSupportActionBar().setTitle("EmployeeFragment");
-                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, EmployeeFragment.newInstance(this)).addToBackStack("EmployeeFragment").commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, EmployeeFragment.newInstance(this)).addToBackStack(null).commit();
                 break;
             case 3:
                 getSupportActionBar().setTitle("Add Domain");
-                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, AddDomainFragment.newInstance(this)).addToBackStack("AddDomainFragment").commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, AddDomainFragment.newInstance(this)).addToBackStack(null).commit();
                 break;
             case 4:
                 getSupportActionBar().setTitle("Add Privilege");
-                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, AddPrivilegeFragment.newInstance(this)).addToBackStack("AddPrivilegeFragment").commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, AddPrivilegeFragment.newInstance(this)).addToBackStack(null).commit();
                 break;
               case 5:
                 getSupportActionBar().setTitle("Add Role");
-                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, AddRoleFragment.newInstance(this)).addToBackStack("AddRoleFragment").commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, AddRoleFragment.newInstance(this)).addToBackStack(null).commit();
                 break;
 
             case 6:
                 getSupportActionBar().setTitle("Show All Task");
-                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,ShowAllTask.newInstance(this)).addToBackStack("ShowAllTask").commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,ShowAllTask.newInstance(this)).addToBackStack(null).commit();
                 break;
 
             case 7:
@@ -169,7 +170,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         getSupportActionBar().setTitle("Projects");
-        getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, ProjectsFragment.newInstance(this)).addToBackStack("").commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, ProjectsFragment.newInstance(this)).addToBackStack(null).commit();
 
 
     }

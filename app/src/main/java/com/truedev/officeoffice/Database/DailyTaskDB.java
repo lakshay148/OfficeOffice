@@ -1,5 +1,6 @@
 package com.truedev.officeoffice.Database;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -35,7 +36,7 @@ public class DailyTaskDB extends SQLiteOpenHelper {
     public static final String TABLE_ADDROLE = "addRole";
     public static final String _ID = "_id";
     public static final String NAME = "name";
-    public static final String ROLENAME="rolename";
+    public static final String ROLENAME = "rolename";
     public static final String PRIVILEGENAME = "prvlgname";
     public static final String _CHK_VALUES = "checkbox_value";
     public static DailyTaskDB mDbHelper;
@@ -60,7 +61,7 @@ public class DailyTaskDB extends SQLiteOpenHelper {
                 "( " + "ID" + " integer primary key autoincrement," + "DOMAINNAME text); ";
 
         String task = " CREATE TABLE " + TABLE_TASK + " ( " + ID + "  INTEGER PRIMARY KEY autoincrement , " + Task + " BLOB, " +
-                Date +" Text, "+  PROJECT +" Text "+")";
+                Date + " Text, " + PROJECT + " Text " + ")";
 
 
         String CREATE_USERDETAIL_TABLE = "CREATE TABLE " + TABLE_USERdETAIL +
@@ -69,12 +70,6 @@ public class DailyTaskDB extends SQLiteOpenHelper {
                 NAME + " TEXT " +
                 ")";
 
-        String CREATE_ADDROLE = "CREATE TABLE " + TABLE_ADDROLE +
-                "(" +
-                _ID + " INTEGER PRIMARY KEY ," +
-                PRIVILEGENAME + " TEXT, " + ROLENAME + "TEXT," +
-                _CHK_VALUES + " TEXT NOT NULL " +
-                ")";
         String project = "CREATE TABLE " + PROJECT_TABLE + " ( " + ID + " Integer PRIMARY KEY autoincrement , " +
                 PROJECT_NAME_FIELD + " TEXT " + " ) ";
 
@@ -94,13 +89,20 @@ public class DailyTaskDB extends SQLiteOpenHelper {
                 ADDMODULEROLE + " TEXT  " +
                 ")";
 
-        Log.e("Add Domain",addDomain);
-        Log.e("Task",task);
-        Log.e("CREATE_USERDETAIL_TABLE",CREATE_USERDETAIL_TABLE);
-        Log.e("CREATE_ADDROLE",CREATE_ADDROLE);
-        Log.e("project",project);
-        Log.e("CREATE_EMPDETAIL_TABLE",CREATE_EMPDETAIL_TABLE);
-        Log.e("CREATE_ADDMODULE_TABLE",CREATE_ADDMODULE_TABLE);
+        String CREATE_ADDROLE = "CREATE TABLE " + TABLE_ADDROLE +
+                "(" +
+                _ID + " INTEGER PRIMARY KEY ," +
+                ROLENAME + " TEXT ," +
+                PRIVILEGENAME + " TEXT " +
+                ")";
+
+        Log.e("Add Domain", addDomain);
+        Log.e("Task", task);
+        Log.e("CREATE_USERDETAIL_TABLE", CREATE_USERDETAIL_TABLE);
+        Log.e("CREATE_ADDROLE", CREATE_ADDROLE);
+        Log.e("project", project);
+        Log.e("CREATE_EMPDETAIL_TABLE", CREATE_EMPDETAIL_TABLE);
+        Log.e("CREATE_ADDMODULE_TABLE", CREATE_ADDMODULE_TABLE);
 
         db.execSQL(CREATE_ADDROLE);
         db.execSQL(CREATE_EMPDETAIL_TABLE);
@@ -114,7 +116,7 @@ public class DailyTaskDB extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_TASK);
-        db.execSQL("DROP TABLE IF EXISTS "+ PROJECT_TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + PROJECT_TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_ADDDOMAIN);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_USERdETAIL);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_ADDROLE);
@@ -122,5 +124,4 @@ public class DailyTaskDB extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_MODULE);
         onCreate(db);
     }
-
 }

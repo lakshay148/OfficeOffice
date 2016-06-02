@@ -2,11 +2,14 @@ package com.truedev.officeoffice.Model;
 
 import java.io.Serializable;
 
+/**
+ * Created by prashantchauhan on 19/5/16.
+ */
 
 public class UserData implements Serializable {
     public String name ="";
     public String roleName="";
-    public boolean chekBoolen=false;
+    public boolean isSelected;
     public String emp_name = "null";
     public String emp_id = "null";
     public String emp_password = "null";
@@ -15,6 +18,16 @@ public class UserData implements Serializable {
     public String module_domain = "domain";
     public String module_empID = "empId";
 
+    public UserData(){
+
+    }
+    public UserData(String name) {
+        this.name = name;
+    }
+    public UserData(String name, boolean isSelected) {
+        this.name = name;
+        this.isSelected = isSelected;
+    }
 
     public String getEmp_id() {
         return emp_id;
@@ -79,16 +92,14 @@ public class UserData implements Serializable {
         this.name = name;
     }
 
-    public boolean isChekBoolen() {
-        return chekBoolen;
-    }
-
-    public void setChekBoolen(boolean chekBoolen) {
-        this.chekBoolen = chekBoolen;
-    }
-
     public String getRoleName() { return roleName;}
 
     public void setRoleName(String roleName) { this.roleName = roleName;}
 
+    public boolean isSelected() {
+        return isSelected;
+    }
+    public void setSelected(boolean selected) {
+        isSelected = selected;
+    }
 }

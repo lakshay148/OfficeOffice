@@ -1,6 +1,7 @@
 package com.truedev.officeoffice.Fragments;
 
 import android.app.Activity;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v4.app.Fragment;
 import android.content.ContentValues;
 import android.content.Context;
@@ -13,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -27,27 +29,31 @@ import com.truedev.officeoffice.Model.UserData;
 import com.truedev.officeoffice.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
-/** created by Ankita Sharma
- *
- /*
+/**
+ * created by Ankita Sharma
+ * <p/>
+ * /*
  */
 
 
 public class AddRoleFragment extends Fragment implements Listener, View.OnClickListener {
 
-   private RecyclerView mRecyclerView;
-   private ListAdapter mAdapter;
+    private RecyclerView mRecyclerView;
+    private ListAdapter mAdapter;
     private EditText mRoleName;
     private CheckBox mCheckBox;
-    private ContentValues mContentValues = new ContentValues();
-    private ArrayList<UserData> mArrayList = new ArrayList<UserData>();
+    private ContentValues mContentValues;
+    private ArrayList<UserData> mArrayList;
     private DailyTaskDB mDailyTaskDB;
     private Context mContext;
-    
+    private Button mSubmit;
+    private SQLiteDatabase mSqLiteDatabase;
+
     public static AddRoleFragment newInstance(Context applicationContext) {
-        AddRoleFragment fragment= new AddRoleFragment();
-        fragment.mContext=applicationContext;
+        AddRoleFragment fragment = new AddRoleFragment();
+        fragment.mContext = applicationContext;
         return fragment;
     }
 
@@ -59,44 +65,54 @@ public class AddRoleFragment extends Fragment implements Listener, View.OnClickL
         View view = inflater.inflate(R.layout.fragment_add_role, container, false);
         mDailyTaskDB = DBFunctions.getInstance(getActivity());
         mCheckBox = (CheckBox) view.findViewById(R.id.checkbox);
+        mSubmit = (Button) view.findViewById(R.id.bSubmit);
         mRecyclerView = (RecyclerView) view.findViewById(R.id.rv_contactlist);
-        mRoleName= (EditText) view.findViewById(R.id.et_name);
+        mRoleName = (EditText) view.findViewById(R.id.et_name);
+        mSubmit.setOnClickListener(this);
+        mContentValues = new ContentValues();
+        mArrayList = new ArrayList<UserData>();
         mAdapter = new ListAdapter(this.getActivity(), DBFunctions.getAllUser());
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         return view;
     }
 
-    /* @Override
-     public void onBackPressed() {
-         super.onBackPressed();
-         Intent intent = new Intent(getActivity(), MainActivity.class);
-         startActivity(intent);
-     }*/
-
-
     @Override
     public void nameToChnge(String name) {
-        DBFunctions.deleteRow(name);
+       /* DBFunctions.deleteRow(name);
         mAdapter = new ListAdapter(getActivity(), DBFunctions.getAllUser());
         mRecyclerView.setAdapter(mAdapter);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));*/
     }
-
     @Override
     public void onClick(View v) {
-        UserData userData = new UserData();
+        String roleName = mRoleName.getText().toString();
+        String data = "";
+        List<UserData> stList = ((ListAdapter) mAdapter)
+                .getStudentist();
 
-        if (!mRoleName.getText().toString().isEmpty()) {
-            userData.roleName = mRoleName.getText().toString();
-        } else {
-            userData.roleName = "";
+        for (int i = 0; i < stList.size(); i++) {
+            UserData singleStudent = stList.get(i);
+            if (singleStudent.isSelected() == true) {
+                data = data + "\n" + singleStudent.getName().toString();
+            }
         }
-        DBFunctions.insertUserRole(userData);
-        Toast.makeText(mContext, "inserted", Toast.LENGTH_SHORT).show();
-        moveToNewActivity();
+        if (roleName.equals("")) {
+            Toast.makeText(getActivity(), "Empty entry", Toast.LENGTH_LONG).show();
+            return;
+        } else {
+            mDailyTaskDB = new DailyTaskDB(mContext);
+            mSqLiteDatabase = mDailyTaskDB.getWritableDatabase();
+            DBFunctions.addRole(roleName, data, mSqLiteDatabase);
+            Toast.makeText(getActivity(), "Data saved", Toast.LENGTH_LONG).show();
+            mDailyTaskDB.close();
+
+            moveToNewActivity();
+        }
+
 
     }
+
     private void moveToNewActivity() {
         Intent i = new Intent(getActivity(), MainActivity.class);
         startActivity(i);

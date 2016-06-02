@@ -25,11 +25,11 @@ import com.truedev.officeoffice.R;
 /**
  * A simple {@link Fragment} subclass.
  *
- * @author : ?
- *         Fragment instantiation with newInstance
- *         private member fields
- *         member fields should start with m
- *         strings to be referred from strings.xml
+ * @author : prashant chauhan
+ *         Fragment instantiation with newInstance:done
+ *         private member fields :done
+ *         member fields should start with m :done
+ *         strings to be referred from strings.xml :done
  */
 public class EmployeeFragment extends Fragment implements AdapterView.OnItemSelectedListener {
     private String[] mRole = {"R1", "R2", "R3", "R4"};

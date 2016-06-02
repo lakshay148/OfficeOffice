@@ -145,17 +145,16 @@ public class DBFunctions {
     }
 
 
-
     public void insertEntryAddDomain(String addDomain) {
         SQLiteDatabase db = ApplicationController.getTasksDB(true);
         try {
             ContentValues newValues = new ContentValues();
             newValues.put(DailyTaskDB.Domain, addDomain);
             db.insert(DailyTaskDB.TABLE_ADDDOMAIN, null, newValues);
-        }catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
-        
+
     }
 
 
@@ -225,26 +224,7 @@ public class DBFunctions {
 
 
     }
-    public static void insertUserRole(UserData userData) {
 
-        SQLiteDatabase db = ApplicationController.getTasksDB(true);
-
-        db.beginTransaction();
-        try {
-            ContentValues values = new ContentValues();
-            values.put(DailyTaskDB.PRIVILEGENAME,userData.name);
-            values.put(DailyTaskDB.ROLENAME,userData.roleName);
-            values.put(DailyTaskDB._CHK_VALUES,userData.chekBoolen);
-            db.insertOrThrow(DailyTaskDB.TABLE_ADDROLE, null, values);
-            db.setTransactionSuccessful();
-        } catch (SQLException e) {
-            e.printStackTrace();
-            Log.d(DailyTaskDB.TAG, "Error while trying to add post to database");
-        } finally {
-            db.endTransaction();
-        }
-
-    }
     public static synchronized DailyTaskDB getInstance(Context context) {
 
         if (DailyTaskDB.mDbHelper == null) {
@@ -272,6 +252,7 @@ public class DBFunctions {
             db.endTransaction();
         }
     }
+
     public static void insertModuleDetail(UserData userData) {
 
         SQLiteDatabase db = ApplicationController.getTasksDB(true);
@@ -296,6 +277,16 @@ public class DBFunctions {
         }
 
 
+    }
+
+    public static void addRole(String roleName, String privilegename, SQLiteDatabase db) {
+
+        ContentValues contentValue = new ContentValues();
+        contentValue.put(DailyTaskDB.ROLENAME, roleName);
+        contentValue.put(DailyTaskDB.PRIVILEGENAME, privilegename);
+
+        db.insert(DailyTaskDB.TABLE_ADDROLE, null, contentValue);
+        Log.e("DATABASE OPERATION", "One row is insert");
     }
 
 }
