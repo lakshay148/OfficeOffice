@@ -4,16 +4,19 @@ import android.support.v4.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
+
+import com.truedev.officeoffice.R;
+
 
 import com.truedev.officeoffice.Adapter.DomainAdapter;
 import com.truedev.officeoffice.Adapter.ShowTaskAdapter;
 import com.truedev.officeoffice.Model.DomainModel;
-import com.truedev.officeoffice.R;
 import com.truedev.officeoffice.Retrofit.RetrofitRequest;
 
 import java.util.ArrayList;
@@ -26,16 +29,16 @@ import retrofit.Retrofit;
 /**
  * Created by dipanshugarg on 2/6/16.
  */
-public class DomainFragmnet extends Fragment {
+public class DomainFragment extends Fragment {
 
-    private ListView mDataShowListView;
+    private RecyclerView mRecyclerView;
     private ShowTaskAdapter mShowTaskAdapter;
     private Context mContext;
     private  ArrayList<DomainModelGet> domainModelGet = new ArrayList<DomainModelGet>();
     private DomainModelGet domainModel;
 
-    public static DomainFragmnet newInstance(Context applicationContext) {
-        DomainFragmnet fragment = new DomainFragmnet();
+    public static DomainFragment newInstance(Context applicationContext) {
+        DomainFragment fragment = new DomainFragment();
         fragment.mContext = applicationContext;
         return fragment;
     }
@@ -46,7 +49,7 @@ public class DomainFragmnet extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.show_all_task_list,container,false);
-        mDataShowListView = (ListView)view.findViewById(R.id.data_show);
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.data_show);
 
         DomainModel model = new DomainModel();
         Call<DomainModel[]> modelCall = RetrofitRequest.getDomain();
@@ -65,7 +68,8 @@ public class DomainFragmnet extends Fragment {
 
                 }
                 DomainAdapter domainAdapter = new DomainAdapter(mContext,domainModelGet);
-                mDataShowListView.setAdapter(domainAdapter);
+                mRecyclerView .setAdapter(domainAdapter);
+                mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
                 Log.d("ArrayList",domainModelGet+"");
 
             }

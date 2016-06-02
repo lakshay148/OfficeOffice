@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 /**
  * Created by dipanshugarg on 2/6/16.
  */
-public class DomainModelGet {
+public class  DomainModelGet {
 
     public String mDomain;
     public String mCreatedBy;
