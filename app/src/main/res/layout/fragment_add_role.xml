@@ -42,7 +42,25 @@
         </android.support.design.widget.TextInputLayout>
 
     </LinearLayout>
-
+        <!--<LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/check_all"
+                android:layout_marginLeft="280dp"
+                />
+            <CheckBox
+                android:id="@+id/chkAll"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="290dp"
+               />
+        </LinearLayout>
+-->
     <LinearLayout
         android:id="@+id/line2"
         android:layout_width="match_parent"

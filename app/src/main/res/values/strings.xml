@@ -17,4 +17,5 @@
     <string name="role_hint">Enter new role</string>
     <string name="prvlg_hint">Add privilege</string>
     <string name="domain_hint">Add Domain</string>
+    <string name="check_all">All</string>
 </resources>

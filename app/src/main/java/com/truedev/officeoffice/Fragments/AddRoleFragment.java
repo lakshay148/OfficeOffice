@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,7 +44,7 @@ public class AddRoleFragment extends Fragment implements Listener, View.OnClickL
     private RecyclerView mRecyclerView;
     private ListAdapter mAdapter;
     private EditText mRoleName;
-    private CheckBox mCheckBox;
+    private CheckBox mCheckBox/*,mCheckBoxAll*/;
     private ContentValues mContentValues;
     private ArrayList<UserData> mArrayList;
     private DailyTaskDB mDailyTaskDB;
@@ -65,6 +66,7 @@ public class AddRoleFragment extends Fragment implements Listener, View.OnClickL
         View view = inflater.inflate(R.layout.fragment_add_role, container, false);
         mDailyTaskDB = DBFunctions.getInstance(getActivity());
         mCheckBox = (CheckBox) view.findViewById(R.id.checkbox);
+       /* mCheckBoxAll = (CheckBox) view.findViewById(R.id.chkAll);*/
         mSubmit = (Button) view.findViewById(R.id.bSubmit);
         mRecyclerView = (RecyclerView) view.findViewById(R.id.rv_contactlist);
         mRoleName = (EditText) view.findViewById(R.id.et_name);
@@ -106,12 +108,33 @@ public class AddRoleFragment extends Fragment implements Listener, View.OnClickL
             DBFunctions.addRole(roleName, data, mSqLiteDatabase);
             Toast.makeText(getActivity(), "Data saved", Toast.LENGTH_LONG).show();
             mDailyTaskDB.close();
-
             moveToNewActivity();
         }
-
-
     }
+
+       /* public void onItemClick (AdapterView < ? > arg0, View arg1,int arg2, long arg3){
+
+            int checkedItemCount = getCheckedItemCount();
+
+            if (getStudentist.getCount() == checkedItemCount)
+                chk.setChecked(true);
+            else
+                chk.setChecked(false);
+        }
+
+        private int getCheckedItemCount(){
+            int cnt = 0;
+            SparseBooleanArray positions = getStudentist().getCheckedItemPositions();
+            int itemCount = getStudentist().getCount();
+
+            for(int i=0;i<itemCount;i++){
+                if(positions.get(i))
+                    cnt++;
+            }
+            return cnt;
+        }*/
+
+
 
     private void moveToNewActivity() {
         Intent i = new Intent(getActivity(), MainActivity.class);
