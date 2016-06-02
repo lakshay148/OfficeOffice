@@ -48,8 +48,8 @@ public class DomainFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.show_all_task_list,container,false);
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.data_show);
+        View view = inflater.inflate(R.layout.domain_recyclerview,container,false);
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.domain_show);
 
         DomainModel model = new DomainModel();
         Call<DomainModel[]> modelCall = RetrofitRequest.getDomain();
