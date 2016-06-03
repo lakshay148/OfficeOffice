@@ -4,7 +4,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.os.Handler;
 import android.preference.PreferenceManager;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -17,6 +19,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.truedev.officeoffice.Constants;
 import com.truedev.officeoffice.Fragments.AddDomainFragment;
@@ -36,6 +39,8 @@ public class MainActivity extends AppCompatActivity {
     private FrameLayout mFrameLayout;
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
+    private  int mCurrentPosition = -1;
+    private boolean doubleBackToExitPressedOnce = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,45 +66,48 @@ public class MainActivity extends AppCompatActivity {
 
         });
 
+        selectItem(0);
+
     }
 
     private void selectItem(int position) {
-
+        mCurrentPosition = position;
         switch (position) {
             case 0:
                 getSupportActionBar().setTitle("Projects");
-                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, ProjectsFragment.newInstance(this)).addToBackStack(null).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, ProjectsFragment.newInstance(this)).commit();
+
                 break;
 
            case 1:
                 getSupportActionBar().setTitle("Add Model");
-               getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, AddModuleFragment.newInstance(this)).addToBackStack(null).commit();
+               getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, AddModuleFragment.newInstance(this)).commit();
                 break;
             case 2:
                 getSupportActionBar().setTitle("EmployeeFragment");
-                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, EmployeeFragment.newInstance(this)).addToBackStack(null).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, EmployeeFragment.newInstance(this)).commit();
                 break;
             case 3:
                 getSupportActionBar().setTitle("Add Domain");
-                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, AddDomainFragment.newInstance(this)).addToBackStack(null).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, AddDomainFragment.newInstance(this)).commit();
                 break;
             case 4:
                 getSupportActionBar().setTitle("Add Privilege");
-                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, AddPrivilegeFragment.newInstance(this)).addToBackStack(null).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, AddPrivilegeFragment.newInstance(this)).commit();
                 break;
               case 5:
                 getSupportActionBar().setTitle("Add Role");
-                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, AddRoleFragment.newInstance(this)).addToBackStack(null).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, AddRoleFragment.newInstance(this)).commit();
                 break;
 
             case 6:
                 getSupportActionBar().setTitle("Show All Task");
-                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,ShowAllTask.newInstance(this)).addToBackStack(null).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,ShowAllTask.newInstance(this)).commit();
                 break;
 
             case 7:
                 getSupportActionBar().setTitle("Show Domain");
-                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, DomainFragment.newInstance(this)).addToBackStack("Show Domain").commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, DomainFragment.newInstance(this)).commit();
                 break;
 
             case 8:
@@ -170,22 +178,31 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         getSupportActionBar().setTitle("Projects");
-        getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, ProjectsFragment.newInstance(this)).addToBackStack(null).commit();
-
-
+        //getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, ProjectsFragment.newInstance(this)).addToBackStack(null).commit();
     }
 
     @Override
     public void onBackPressed() {
         if (mDrawerLayout.isDrawerOpen(Gravity.LEFT)) {
             mDrawerLayout.closeDrawers();
+        } else if (mCurrentPosition!=0) {
+            mCurrentPosition = 0;
+            getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, ProjectsFragment.newInstance(this)).commit();
         } else {
-            if (getSupportFragmentManager().getBackStackEntryCount()> 0) {
-                getSupportFragmentManager().popBackStack();
-
-            } else {
+            if (doubleBackToExitPressedOnce){
                 super.onBackPressed();
+                return;
             }
+            this.doubleBackToExitPressedOnce = true;
+            Toast.makeText(this, "Please press BACK again to exit", Toast.LENGTH_SHORT).show();
+
+            new Handler().postDelayed(new Runnable() {
+
+                @Override
+                public void run() {
+                    doubleBackToExitPressedOnce = false;
+                }
+            }, 2000);
         }
     }
 }

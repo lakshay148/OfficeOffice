@@ -12,9 +12,6 @@ import com.truedev.officeoffice.R;
 
 import java.util.ArrayList;
 
-/**
- * Created by dipanshugarg on 24/5/16.
- */
 public class ShowTaskAdapter extends BaseAdapter {
 
     private ArrayList<ProjectModel> mProjectModel;

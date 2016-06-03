@@ -4,6 +4,7 @@ import android.support.v4.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,15 +17,6 @@ import com.truedev.officeoffice.R;
 
 import java.util.ArrayList;
 
-/**
- * Created by dipanshugarg on 20/5/16.
- *
- * Fragment instantiation with newInstance
- * private member fields
- * member fields should start with m
- * strings to be referred from strings.xml
- *
- */
 public class ShowAllTask extends Fragment {
 
     private ListView mDataShowListView;
