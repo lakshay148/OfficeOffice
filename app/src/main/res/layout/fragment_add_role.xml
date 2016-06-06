@@ -23,7 +23,7 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <!--<LinearLayout
+            <LinearLayout
                 android:id="@+id/line1"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
@@ -44,9 +44,9 @@
                         android:inputType="textNoSuggestions" />
                 </android.support.design.widget.TextInputLayout>
 
-            </LinearLayout>-->
+            </LinearLayout>
 
-            <LinearLayout
+           <!-- <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
@@ -62,7 +62,7 @@
                     android:id="@+id/chkAll"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
-            </LinearLayout>
+            </LinearLayout>-->
 
             <LinearLayout
                 android:id="@+id/line2"

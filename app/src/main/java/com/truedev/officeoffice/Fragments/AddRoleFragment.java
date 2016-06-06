@@ -100,7 +100,7 @@ public class AddRoleFragment extends Fragment implements Listener, View.OnClickL
         String roleName = mRoleName.getText().toString();
         String data = "";
         List<UserData> stList = ((ListAdapter) mAdapter)
-                .getStudentist();
+                .getRoleist();
 
         for (int i = 0; i < stList.size(); i++) {
             UserData singleStudent = stList.get(i);
@@ -125,7 +125,7 @@ public class AddRoleFragment extends Fragment implements Listener, View.OnClickL
 
             int checkedItemCount = getCheckedItemCount();
 
-            if (getStudentist.getCount() == checkedItemCount)
+            if (getRoleist.getCount() == checkedItemCount)
                 chk.setChecked(true);
             else
                 chk.setChecked(false);
@@ -133,8 +133,8 @@ public class AddRoleFragment extends Fragment implements Listener, View.OnClickL
 
         private int getCheckedItemCount(){
             int cnt = 0;
-            SparseBooleanArray positions = getStudentist().getCheckedItemPositions();
-            int itemCount = getStudentist().getCount();
+            SparseBooleanArray positions = getRoleist().getCheckedItemPositions();
+            int itemCount = getRoleist().getCount();
 
             for(int i=0;i<itemCount;i++){
                 if(positions.get(i))

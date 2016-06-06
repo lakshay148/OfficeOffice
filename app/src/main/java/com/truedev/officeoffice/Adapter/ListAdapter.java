@@ -61,15 +61,6 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
         });
 
 
-        /*holder.iv_delete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mListner.nameToChnge(mDataList.get((Integer) v.getTag()).name);
-
-
-            }
-      });*/
-
     }
 
     @Override
@@ -93,7 +84,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
         }
     }
 
-    public List<UserData> getStudentist() {
+    public List<UserData> getRoleist() {
         return mDataList;
     }
 }

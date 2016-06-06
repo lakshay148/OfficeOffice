@@ -87,14 +87,20 @@ public class AddTaskFragment extends Fragment {
                 for (int i = 0; i<count ; i++ ) {
                     View view2 = mListShowData.getChildAt(i);
                     mdataTask= (TextView) view2.findViewById(R.id.data);
-                    mTask.add(mdataTask.getText().toString());
+                    if(mdataTask.getText().toString().trim().equals("")){
+                        Toast.makeText(getActivity(), "Empty entry", Toast.LENGTH_LONG).show();
+                    }else {
+                        mTask.add(mdataTask.getText().toString());
+                        DBFunctions dailyTaskDB = new DBFunctions();
+                        long getSuccess= dailyTaskDB.insertTask(mTask,CommonUtils.getCurrentDate(),mProject);
+                        if(getSuccess>=1) {
+                            Toast.makeText(getActivity(),"Data Added Successfully",Toast.LENGTH_LONG).show();
+                            moveToNewActivity();
+                        }
+                    }
+
                 }
-                DBFunctions dailyTaskDB = new DBFunctions();
-                long getSuccess= dailyTaskDB.insertTask(mTask,CommonUtils.getCurrentDate(),mProject);
-                if(getSuccess>=1) {
-                    Toast.makeText(getActivity(),"Data Added Successfully",Toast.LENGTH_LONG).show();
-                    moveToNewActivity();
-                }
+
             }
         });
         return view;
