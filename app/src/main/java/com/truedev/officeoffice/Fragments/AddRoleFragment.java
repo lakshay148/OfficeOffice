@@ -44,14 +44,17 @@ public class AddRoleFragment extends Fragment implements Listener, View.OnClickL
     private RecyclerView mRecyclerView;
     private ListAdapter mAdapter;
     private EditText mRoleName;
-    private CheckBox mCheckBox/*,mCheckBoxAll*/;
+    private CheckBox mCheckBox;
     private ContentValues mContentValues;
     private ArrayList<UserData> mArrayList;
     private DailyTaskDB mDailyTaskDB;
     private Context mContext;
     private Button mSubmit;
     private SQLiteDatabase mSqLiteDatabase;
-
+    private static int count = 0;
+    private CheckBox checkBox_header;
+    private  CheckBox mAllCheckBox;
+    SparseBooleanArray mChecked = new SparseBooleanArray();
     public static AddRoleFragment newInstance(Context applicationContext) {
         AddRoleFragment fragment = new AddRoleFragment();
         fragment.mContext = applicationContext;
@@ -66,7 +69,7 @@ public class AddRoleFragment extends Fragment implements Listener, View.OnClickL
         View view = inflater.inflate(R.layout.fragment_add_role, container, false);
         mDailyTaskDB = DBFunctions.getInstance(getActivity());
         mCheckBox = (CheckBox) view.findViewById(R.id.checkbox);
-       /* mCheckBoxAll = (CheckBox) view.findViewById(R.id.chkAll);*/
+        mAllCheckBox = (CheckBox) view.findViewById(R.id.chkAll);
         mSubmit = (Button) view.findViewById(R.id.bSubmit);
         mRecyclerView = (RecyclerView) view.findViewById(R.id.rv_contactlist);
         mRoleName = (EditText) view.findViewById(R.id.et_name);
@@ -76,6 +79,12 @@ public class AddRoleFragment extends Fragment implements Listener, View.OnClickL
         mAdapter = new ListAdapter(this.getActivity(), DBFunctions.getAllUser());
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mAllCheckBox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
         return view;
     }
 

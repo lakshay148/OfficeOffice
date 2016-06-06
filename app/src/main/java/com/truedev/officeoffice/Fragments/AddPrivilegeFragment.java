@@ -19,19 +19,21 @@ import com.truedev.officeoffice.Database.DailyTaskDB;
 import com.truedev.officeoffice.Model.UserData;
 import com.truedev.officeoffice.R;
 
-/** Created by Ankita sharma
- *
+/**
+ * Created by Ankita sharma
+ * <p/>
  * /
  */
 public class AddPrivilegeFragment extends Fragment {
-   private EditText mEt_name;
-   private Button mBtn_next;
-   private Context mContext;
+    private EditText mEt_name;
+    private Button mBtn_next;
+    private Context mContext;
+
 
 
     public static AddPrivilegeFragment newInstance(Context applicationContext) {
         AddPrivilegeFragment fragment = new AddPrivilegeFragment();
-        fragment.mContext=applicationContext;
+        fragment.mContext = applicationContext;
         return fragment;
     }
 
@@ -50,15 +52,15 @@ public class AddPrivilegeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 UserData userData = new UserData();
-
-                if (!mEt_name.getText().toString().isEmpty()) {
-                    userData.name = mEt_name.getText().toString();
+                userData.name = mEt_name.getText().toString();
+                if (userData.name.equals("")) {
+                    Toast.makeText(getActivity(), "Field Vaccant", Toast.LENGTH_LONG).show();
                 } else {
-                    userData.name = "";
+                    DBFunctions.insertUserDetail(userData);
+                    Toast.makeText(getActivity(), "Privilege added", Toast.LENGTH_SHORT).show();
+                    moveToNewActivity();
                 }
-                DBFunctions.insertUserDetail(userData);
-                Toast.makeText(getActivity(), "Privilege added", Toast.LENGTH_SHORT).show();
-                moveToNewActivity();
+
             }
         });
         return view;

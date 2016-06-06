@@ -37,7 +37,6 @@ import java.util.ArrayList;
 
 
 public class AddTaskFragment extends Fragment {
-
     private EditText mGetTask,mDate;
     private ImageView mAddTask;
     private ListView mListShowData;
@@ -48,20 +47,16 @@ public class AddTaskFragment extends Fragment {
     private ArrayList<String> mTask = new ArrayList<String>();
     private AddTaskAdapter mDynamicAdapter;
     private Context mContext;
-
     public static AddTaskFragment newInstance(Context applicationContext, String project) {
         AddTaskFragment fragment = new AddTaskFragment();
         fragment.mContext = applicationContext;
         mProject = project;
         return fragment;
     }
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState) {
-
         View view = inflater.inflate(R.layout.add_layout,container,false);
-
         mGetTask = (EditText)view.findViewById(R.id.get_task);
         mAddTask = (ImageView)view.findViewById(R.id.add_task);
         mListShowData = (ListView)view.findViewById(R.id.add_layout);
@@ -84,7 +79,6 @@ public class AddTaskFragment extends Fragment {
                 }
             }
         });
-
         mSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -96,7 +90,6 @@ public class AddTaskFragment extends Fragment {
                     mTask.add(mdataTask.getText().toString());
                 }
                 DBFunctions dailyTaskDB = new DBFunctions();
-
                 long getSuccess= dailyTaskDB.insertTask(mTask,CommonUtils.getCurrentDate(),mProject);
                 if(getSuccess>=1) {
                     Toast.makeText(getActivity(),"Data Added Successfully",Toast.LENGTH_LONG).show();
@@ -104,8 +97,6 @@ public class AddTaskFragment extends Fragment {
                 }
             }
         });
-
-
         return view;
     }
     private void moveToNewActivity() {
