@@ -7,12 +7,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -37,6 +40,7 @@ public class EmployeeFragment extends Fragment implements AdapterView.OnItemSele
     private Button mBtn_submit;
     private DailyTaskDB dbHelper;
     private Spinner mSpinner;
+    private RelativeLayout mRelativeLayoutEmployee;
 
     Context mContext;
 
@@ -57,7 +61,14 @@ public class EmployeeFragment extends Fragment implements AdapterView.OnItemSele
         mEt_empid = (EditText) view.findViewById(R.id.et_ID);
         mEt_password = (EditText) view.findViewById(R.id.et_password);
         mBtn_submit = (Button) view.findViewById(R.id.btn_next);
-
+        mRelativeLayoutEmployee = (RelativeLayout) view.findViewById(R.id.relativelayout_addemployee);
+        mRelativeLayoutEmployee.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent ev) {
+                hideKeyboard(view);
+                return false;
+            }
+        });
         ArrayAdapter<String> adapter_state = new ArrayAdapter<String>(getActivity(),
                 android.R.layout.simple_spinner_item, mRole);
         adapter_state
@@ -105,5 +116,10 @@ public class EmployeeFragment extends Fragment implements AdapterView.OnItemSele
         startActivity(i);
         ((Activity) getActivity()).overridePendingTransition(0, 0);
 
+    }
+
+    protected void hideKeyboard(View view) {
+        InputMethodManager in = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        in.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
     }
 }

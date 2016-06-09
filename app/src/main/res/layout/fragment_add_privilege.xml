@@ -5,6 +5,7 @@
     tools:context="com.truedev.officeoffice.Fragments.AddPrivilegeFragment">
 
     <LinearLayout
+        android:id="@+id/linearlayout_addprivilege"
         android:background="#ffffff"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

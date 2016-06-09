@@ -6,11 +6,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -22,19 +25,19 @@ import com.truedev.officeoffice.R;
 
 /**
  * A simple {@link Fragment} subclass.
- *@auther : Prashant chauhan
  *
- *
+ * @auther : Prashant chauhan
+ * <p/>
+ * <p/>
  * Review Comments : done
  * default Constructor :done
  * private fields :done
  * strings to be referred from strings.xml :done
  * insert data with class objects :done
- *
+ * <p/>
  * owner and domain to be picked from db
- *
  */
-public class AddModuleFragment extends Fragment  {
+public class AddModuleFragment extends Fragment {
     private String[] mRole = {"Admin", "User"};
     private String[] mDomain = {"Android", "IOS", "Web"};
     private EditText mEmpID;
@@ -42,6 +45,7 @@ public class AddModuleFragment extends Fragment  {
     private Button mBtn_submit;
     private DailyTaskDB dbHelper;
     private Context mContext;
+    private RelativeLayout mRelativeLayoutModule;
 
     public static AddModuleFragment newInstance(Context applicationContext) {
         AddModuleFragment fragment = new AddModuleFragment();
@@ -59,6 +63,14 @@ public class AddModuleFragment extends Fragment  {
         mSpinnerRole = (Spinner) view.findViewById(R.id.spinner_role);
         mEmpID = (EditText) view.findViewById(R.id.et_ID);
         mBtn_submit = (Button) view.findViewById(R.id.btn_submit);
+        mRelativeLayoutModule = (RelativeLayout) view.findViewById(R.id.releativelayout_module);
+        mRelativeLayoutModule.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent ev) {
+                hideKeyboard(view);
+                return false;
+            }
+        });
 
         ArrayAdapter<String> adapter_state_role = new ArrayAdapter<String>(getActivity(),
                 android.R.layout.simple_spinner_item, mRole);
@@ -81,7 +93,7 @@ public class AddModuleFragment extends Fragment  {
                 userData.module_role = mSpinnerRole.getSelectedItem().toString();
                 userData.module_domain = mSpinnerDomain.getSelectedItem().toString();
 
-                if ( userData.emp_id.equals("")) {
+                if (userData.emp_id.equals("")) {
                     Toast.makeText(getActivity(), "Field Vaccant", Toast.LENGTH_LONG).show();
                 } else {
                     DBFunctions.insertModuleDetail(userData);
@@ -98,5 +110,10 @@ public class AddModuleFragment extends Fragment  {
         startActivity(i);
         (getActivity()).overridePendingTransition(0, 0);
 
+    }
+
+    protected void hideKeyboard(View view) {
+        InputMethodManager in = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        in.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
     }
 }

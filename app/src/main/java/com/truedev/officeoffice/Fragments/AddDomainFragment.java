@@ -6,12 +6,17 @@ import android.support.v4.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.truedev.officeoffice.Activity.MainActivity;
@@ -25,19 +30,22 @@ import retrofit.Callback;
 import retrofit.Response;
 import retrofit.Retrofit;
 
-/** Created by Ankita Sharma
- *
- /*
+/**
+ * Created by Ankita Sharma
+ * <p>
+ * /*
  */
 public class AddDomainFragment extends Fragment {
-   private Context mContext;
-   private EditText mEditTextdomainname;
-   private Button mButton;
-   private DomainModel mDomainModel;
+    private Context mContext;
+    private EditText mEditTextdomainname;
+    private Button mButton;
+    private DomainModel mDomainModel;
+    private RelativeLayout mRelativeLayoutDomain;
+
 
     public static AddDomainFragment newInstance(Context applicationContext) {
-        AddDomainFragment fragment= new  AddDomainFragment();
-        fragment.mContext=applicationContext;
+        AddDomainFragment fragment = new AddDomainFragment();
+        fragment.mContext = applicationContext;
         return fragment;
     }
 
@@ -47,7 +55,15 @@ public class AddDomainFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_add_domain, container, false);
         mEditTextdomainname = (EditText) view.findViewById(R.id.adddomain);
+        mRelativeLayoutDomain = (RelativeLayout) view.findViewById(R.id.releativelayout_domain);
         mButton = (Button) view.findViewById(R.id.add);
+        mRelativeLayoutDomain.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent ev) {
+                hideKeyboard(view);
+                return false;
+            }
+        });
         mDomainModel = new DomainModel();
 
         mButton.setOnClickListener(new View.OnClickListener() {
@@ -73,7 +89,7 @@ public class AddDomainFragment extends Fragment {
 
                         @Override
                         public void onFailure(Throwable t) {
-                            Log.e("Add Domain Failure", t+"");
+                            Log.e("Add Domain Failure", t + "");
                         }
                     });
 
@@ -82,10 +98,16 @@ public class AddDomainFragment extends Fragment {
         });
         return view;
     }
+
     private void moveToNewActivity() {
         Intent i = new Intent(getActivity(), MainActivity.class);
         startActivity(i);
         ((Activity) getActivity()).overridePendingTransition(0, 0);
 
+    }
+
+    protected void hideKeyboard(View view) {
+        InputMethodManager in = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        in.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
     }
 }
