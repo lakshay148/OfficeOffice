@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -98,21 +99,21 @@ public class AddTaskFragment extends Fragment {
             public void onClick(View v) {
                 mTask.clear();
                 int count = mListShowData.getCount();
+                Log.d("List Count", count+"");
                 for (int i = 0; i < count; i++) {
                     View view2 = mListShowData.getChildAt(i);
                     mdataTask = (TextView) view2.findViewById(R.id.data);
-                    if (mdataTask.getText().toString().trim().equals("")) {
-                        Toast.makeText(getActivity(), "Empty entry", Toast.LENGTH_LONG).show();
-                    } else {
-                        mTask.add(mdataTask.getText().toString());
-                        DBFunctions dailyTaskDB = new DBFunctions();
-                        long getSuccess = dailyTaskDB.insertTask(mTask, CommonUtils.getCurrentDate(), mProject);
-                        if (getSuccess >= 1) {
-                            Toast.makeText(getActivity(), "Data Added Successfully", Toast.LENGTH_LONG).show();
-                            moveToNewActivity();
-                        }
+                    mTask.add(mdataTask.getText().toString());
+                }
+                if(count<0) {
+                    DBFunctions dailyTaskDB = new DBFunctions();
+                    long getSuccess = dailyTaskDB.insertTask(mTask, CommonUtils.getCurrentDate(), mProject);
+                    if (getSuccess >= 1) {
+                        Toast.makeText(getActivity(), "Data Added Successfully", Toast.LENGTH_LONG).show();
+                        moveToNewActivity();
                     }
-
+                } else {
+                    Toast.makeText(getActivity(), "There is no task", Toast.LENGTH_LONG).show();
                 }
 
             }
