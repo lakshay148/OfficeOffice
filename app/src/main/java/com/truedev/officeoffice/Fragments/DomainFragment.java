@@ -10,6 +10,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 
 import com.truedev.officeoffice.R;
 
@@ -36,6 +38,7 @@ public class DomainFragment extends Fragment {
     private Context mContext;
     private  ArrayList<DomainModelGet> domainModelGet = new ArrayList<DomainModelGet>();
     private DomainModelGet domainModel;
+    private ProgressBar progressBar;
 
     public static DomainFragment newInstance(Context applicationContext) {
         DomainFragment fragment = new DomainFragment();
@@ -48,16 +51,19 @@ public class DomainFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.domain_recyclerview,container,false);
+        final View view = inflater.inflate(R.layout.domain_recyclerview,container,false);
         mRecyclerView = (RecyclerView) view.findViewById(R.id.domain_show);
-
+        progressBar = (ProgressBar)view.findViewById(R.id.pbHeaderProgress);
         DomainModel model = new DomainModel();
         Call<DomainModel[]> modelCall = RetrofitRequest.getDomain();
+        progressBar.setVisibility(View.VISIBLE);
 
         modelCall.enqueue(new Callback<DomainModel[]>() {
             @Override
             public void onResponse(Response<DomainModel[]> response, Retrofit retrofit) {
                 DomainModel[] domainModels = response.body();
+                progressBar.setVisibility(View.GONE);
+                ((LinearLayout)view.findViewById(R.id.linlaHeaderProgress)).setVisibility(view.GONE);
                 for (int i = 0; i < response.body().length; i++) {
                     domainModel = new DomainModelGet();
                     domainModel.setmCreatedAt( domainModels[i].getmCreatedAt());
