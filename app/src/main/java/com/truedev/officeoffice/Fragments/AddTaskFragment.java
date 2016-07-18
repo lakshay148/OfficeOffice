@@ -105,7 +105,7 @@ public class AddTaskFragment extends Fragment {
                     mdataTask = (TextView) view2.findViewById(R.id.data);
                     mTask.add(mdataTask.getText().toString());
                 }
-                if(count<0) {
+                if(count > 0) {
                     DBFunctions dailyTaskDB = new DBFunctions();
                     long getSuccess = dailyTaskDB.insertTask(mTask, CommonUtils.getCurrentDate(), mProject);
                     if (getSuccess >= 1) {
